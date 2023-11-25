@@ -11,6 +11,9 @@ import dao.DBConnect;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -171,6 +174,46 @@ public class ClientController {
 
         return songs;
     }
+    
+    /*
+	 * Code for displaying all Playlists.
+	 * Creating a List view to display the list of all playlists and details.
+	 */
 	
+    public class PlaylistController {
+
+        @FXML
+        private ListView<String> playlist_listview;
+
+        @FXML
+        private Button playlistView_btn;
+
+        @FXML
+        private Label playlist_detailsLabel;
+
+        // Add methods and event handlers here
+
+        public void initialize() {
+            // This method is automatically called when the FXML file is loaded
+            // You can initialize your components or set event handlers here
+        }
+        
+        @FXML
+        private void viewPlaylistDetails() {
+            String selectedPlaylist = playlist_listview.getSelectionModel().getSelectedItem();
+            if (selectedPlaylist != null) {
+                // Fetch playlist details and update detailsLabel
+                String playlistDetails = "Details for " + selectedPlaylist + ":\n"
+                        + "Song 1 - Artist 1 - Album 1\n"
+                        + "Song 2 - Artist 2 - Album 2\n"
+                        + "Song 3 - Artist 3 - Album 3";
+
+                playlist_detailsLabel.setText(playlistDetails);
+            } else {
+            	playlist_detailsLabel.setText("Please select a playlist to view details.");
+            }
+        }
+    }
+
 	
 }
