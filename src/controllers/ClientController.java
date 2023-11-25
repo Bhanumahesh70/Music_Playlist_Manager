@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import models.PlaylistModel;
@@ -35,6 +36,9 @@ public class ClientController {
 
 	@FXML
 	private Pane playlists_panel;
+	
+	@FXML
+	private Pane displaySongs_Panel;
 
 	@FXML
 	private TextField playlistName_text;
@@ -65,6 +69,7 @@ public class ClientController {
 		panel1.setVisible(false);
 		allsongs_panel.setVisible(true);
 		playlists_panel.setVisible(false);
+		displaySongs_Panel.setVisible(false);
 	}
 
 	@FXML
@@ -73,6 +78,7 @@ public class ClientController {
 		panel1.setVisible(false);
 		allsongs_panel.setVisible(false);
 		playlists_panel.setVisible(false);
+		displaySongs_Panel.setVisible(false);
 	}
 
 	@FXML
@@ -81,6 +87,7 @@ public class ClientController {
 		panel1.setVisible(false);
 		allsongs_panel.setVisible(false);
 		playlists_panel.setVisible(true);
+		displaySongs_Panel.setVisible(false);
 	    initialize2();
 	}
 
@@ -211,6 +218,9 @@ public class ClientController {
 
 		@FXML
 		private Label playlist_detailsLabel;
+		
+		@FXML
+		private TextArea songDeatils_textArea;
 
 		// Add methods and event handlers here
 		
@@ -221,7 +231,8 @@ public class ClientController {
 			List<String> playlist_titles = new ArrayList<String>();
 			for(PlaylistModel playlist:playlists) {
 				
-				playlist_titles.add(playlist.getPlaylistName());
+				String playlistTitle = playlist.getPlaylistName();
+				playlist_titles.add(playlistTitle);
 			}
 			System.out.println("Displaying Playlists");
 			playlist_listview.getItems().clear(); // Clear existing items
@@ -261,25 +272,32 @@ public class ClientController {
 
 		
 		private void viewPlaylistDetails(String playlistName) {
+			
+			displaySongs_Panel.setVisible(true);
+			playlists_panel.setVisible(false);
+			
 			if (playlistName != null) {
 				// Fetch playlist details from the database based on the selected playlist
 				String playlistDetails = fetchDetailsFromDatabase(playlistName);
-				playlist_detailsLabel.setText(playlistDetails);
+				//playlist_detailsLabel.setText(playlistDetails);
+				songDeatils_textArea.setText("The song details are: "+playlistDetails);
 			} else {
 				playlist_detailsLabel.setText("Please select a playlist to view details.");
+				songDeatils_textArea.setText("Select a playlist");
 			}
 		}
 
-		@SuppressWarnings({ "finally", "null" })
+		@SuppressWarnings("null")
 		private String fetchDetailsFromDatabase(String playlistName) {
 			// Sample implementation; replace with your actual logic
 
 			//String playlistName = selectedPlaylist.getPlaylistName();
 			String songDetails = null;
+			StringBuilder sc = new StringBuilder();
 
 			try {
 				stmt = conn.getConnection().createStatement();
-				System.out.println("Fetchin song details for playlist "+playlistName);
+				System.out.println("Fetching song details for playlist "+playlistName);
 				String sql = "SELECT * FROM beatmusic_playlist WHERE playlist_name ='" + playlistName+"'";
 				myRs = stmt.executeQuery(sql);
 				List<Integer> songIds = new ArrayList<Integer>();
@@ -288,11 +306,13 @@ public class ClientController {
 					songIds.add(myRs.getInt("song_id"));
 				}
 				List<SongModel> songsFromPlaylist = new ArrayList<SongModel>();
+				
+				System.out.println("Fetching the songs from the playlist table in database");
 				for (int i : songIds) {
 					songsFromPlaylist.add(fetchSongsFromPlaylist(i));
 				}
 
-				StringBuilder sc = null;
+				
 				sc.append("Details for " +playlistName + ":\n");
 				for (SongModel song : songsFromPlaylist) {
 
@@ -312,9 +332,11 @@ public class ClientController {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} finally {
+			} 
+			
+			System.out.println("Son details are: "+ songDetails);
 				return songDetails;
-			}
+			
 
 		}
 		/*
@@ -335,8 +357,6 @@ public class ClientController {
 
 			// TODO: Connect to your database
 			try {
-
-				System.out.println("Fetching all songs from the playlist table in database");
 				stmt = conn.getConnection().createStatement();
 				String sql = null;
 				sql = "SELECT * FROM beatmusic_songs WHERE song_id=" + song_id;
