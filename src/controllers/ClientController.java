@@ -31,6 +31,9 @@ public class ClientController {
 	private Pane allsongs_panel;
 	
 	@FXML
+	private Pane playlists_panel;
+	
+	@FXML
 	private TextField playlistName_text;
 	
 	@FXML
@@ -50,12 +53,21 @@ public class ClientController {
 		playlist_panel.setVisible(false);
 		panel1.setVisible(false);
 		allsongs_panel.setVisible(true);
+		playlists_panel.setVisible(false);
 	}
 	
 	public void createPlaylist_click() {
 		playlist_panel.setVisible(true);
 		panel1.setVisible(false);
 		allsongs_panel.setVisible(false);
+		playlists_panel.setVisible(false);
+	}
+	
+	public void displayPlaylist_panel() {
+		playlist_panel.setVisible(false);
+		panel1.setVisible(false);
+		allsongs_panel.setVisible(false);
+		playlists_panel.setVisible(true);
 	}
 	
 	public void createPlaylist() {
