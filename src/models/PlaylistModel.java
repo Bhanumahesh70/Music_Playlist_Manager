@@ -12,7 +12,10 @@ public class PlaylistModel {
         this.owner = owner;
         this.songs = new ArrayList<>();
     }
-
+    
+    public PlaylistModel(String playlistName) {
+    	this.playlistName = playlistName;
+    }
     // Getters and setters
 
     public String getPlaylistName() {

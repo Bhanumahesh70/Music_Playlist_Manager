@@ -16,7 +16,7 @@ public class LoginModel extends DBConnect {
 	public void setAdmin(Boolean admin) {
 		this.admin = admin;
 	}
-	
+	private static int userId;
 	public Boolean getCredentials(String username, String password){
            
            String query = "SELECT * FROM beatmusic_users WHERE username = ? and password = ?;";
@@ -26,6 +26,7 @@ public class LoginModel extends DBConnect {
                ResultSet rs = stmt.executeQuery();
                 if(rs.next()) { 
                 	setAdmin(rs.getBoolean("is_admin"));
+                	userId=rs.getInt("user_id");
                 	return true;
                	}
              }catch (SQLException e) {
@@ -33,5 +34,9 @@ public class LoginModel extends DBConnect {
              }
 	       return false;
     }
+	
+	public static int getUserId() {
+		return userId;
+	}
 
 }

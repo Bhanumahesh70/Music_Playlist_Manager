@@ -66,8 +66,8 @@ public class LoginController {
 				// If user is customer, inflate customer view
 				root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/ClientView.fxml"));
 				// ***Set user ID acquired from db****
-				int user_id = 1; // hard coded for testing purposes only!!
-				// ClientController.setUser(user_id);
+				int user_id = LoginModel.getUserId(); // hard coded for testing purposes only!!
+				 ClientController.setUser(user_id);
 				Main.stage.setTitle("Client View");
 			}
 			Scene scene = new Scene(root);
