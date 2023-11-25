@@ -81,7 +81,7 @@ public class ClientController {
 		panel1.setVisible(false);
 		allsongs_panel.setVisible(false);
 		playlists_panel.setVisible(true);
-		initializing();
+	    initialize2();
 	}
 
 	@FXML
@@ -90,7 +90,6 @@ public class ClientController {
 		try {
 			// Execute a query
 			System.out.println("Inserting data into the playlist table...");
-			stmt = conn.getConnection().createStatement();
 			String sql = null;
 			String songName = songName_text.getText();
 			String playlistName = playlistName_text.getText();
@@ -114,7 +113,8 @@ public class ClientController {
 			prepstmt.setInt(3, song_id);
 			prepstmt.executeUpdate();
 			System.out.println("Playlist created");
-
+			prepstmt.close();
+			myRs.close();
 			conn.getConnection().close();
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -140,8 +140,16 @@ public class ClientController {
 
 	@FXML
 	private TableColumn<SongModel, Integer> duration_column;
-
+	
+	@FXML
 	public void initialize() {
+		initialize1();
+		//initialize2();
+		
+	}
+	
+	@FXML
+	public void initialize1() {
 		title_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
 		artist_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getArtist()));
 		album_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAlbum()));
@@ -175,11 +183,16 @@ public class ClientController {
 				int duration = myRs.getInt("duration");
 
 				songs.add(new SongModel(title, artist, album, duration));
+				
 			}
+			stmt.close();
+			myRs.close();
+			//conn.getConnection().close();
 		} catch (SQLException e) {
+			
 			e.printStackTrace();
 		}
-
+		
 		return songs;
 	}
 
@@ -200,8 +213,9 @@ public class ClientController {
 		private Label playlist_detailsLabel;
 
 		// Add methods and event handlers here
-
-		public void initializing() {
+		
+		@FXML
+		public void initialize2() {
 			List<PlaylistModel> playlists = fetchPlaylistFromDatabase();
 			// Populate the ListView with fetched playlists
 			List<String> playlist_titles = new ArrayList<String>();
@@ -209,8 +223,9 @@ public class ClientController {
 				
 				playlist_titles.add(playlist.getPlaylistName());
 			}
+			System.out.println("Displaying Playlists");
+			playlist_listview.getItems().clear(); // Clear existing items
 			playlist_listview.getItems().addAll( playlist_titles);
-
 			// Set an event listener for the ListView selection change
 			playlist_listview.getSelectionModel().selectedItemProperty()
 					.addListener((observable, oldValue, newValue) -> viewPlaylistDetails(newValue));
@@ -233,11 +248,14 @@ public class ClientController {
 					String playlistName = myRs.getString("playlist_name");
 					// int songId = myRs.getInt("song_id");
 					playlists.add(new PlaylistModel(playlistName));
+					
 				}
+				stmt.close();
+				myRs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
+			System.out.println("Fetching the playlists is complete");
 			return playlists;
 		}
 
@@ -252,7 +270,7 @@ public class ClientController {
 			}
 		}
 
-		@SuppressWarnings("finally")
+		@SuppressWarnings({ "finally", "null" })
 		private String fetchDetailsFromDatabase(String playlistName) {
 			// Sample implementation; replace with your actual logic
 
@@ -287,6 +305,9 @@ public class ClientController {
 
 				}
 				songDetails = sc.toString();
+				stmt.close();
+				myRs.close();
+				//conn.getConnection().close();
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -328,7 +349,11 @@ public class ClientController {
 					int duration = myRs.getInt("duration");
 
 					songsFromPlaylist = new SongModel(title, artist, album, duration);
+					
+					//conn.getConnection().close();
 				}
+				stmt.close();
+				myRs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

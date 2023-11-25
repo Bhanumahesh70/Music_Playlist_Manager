@@ -18,7 +18,9 @@ public class DBConnect {
 
 	public DBConnect() {
 		try {
+			System.out.println("Connecting to the database");
 			connection = DriverManager.getConnection(url, username, password);
+			System.out.println("Connected to the database");
 		} catch (SQLException e) {
 			System.out.println("Error creating connection to database: " + e);
 			System.exit(-1);
