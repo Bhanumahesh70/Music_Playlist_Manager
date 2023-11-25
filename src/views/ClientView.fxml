@@ -20,7 +20,7 @@
             <Button mnemonicParsing="false" text="Delete Playlist" />
          </children>
       </VBox>
-      <Pane fx:id="panel1" layoutX="200.0" layoutY="73.0" prefHeight="200.0" prefWidth="200.0">
+      <Pane fx:id="panel1" layoutX="200.0" layoutY="73.0" prefHeight="200.0" prefWidth="200.0" visible="false">
          <children>
             <Label layoutX="72.0" layoutY="6.0" text="Beat Music" />
          </children>
@@ -47,10 +47,10 @@
             </TableView>
          </children>
       </Pane>
-      <Pane fx:id="playlists_panel" layoutX="137.0" layoutY="27.0" prefHeight="345.0" prefWidth="375.0" visible="false">
+      <Pane fx:id="playlists_panel" layoutX="137.0" layoutY="27.0" prefHeight="345.0" prefWidth="375.0">
          <children>
             <ListView fx:id="playlist_listview" layoutX="73.0" layoutY="36.0" prefHeight="200.0" prefWidth="200.0" />
-            <Button fx:id="playlistView_btn" layoutX="188.0" layoutY="270.0" mnemonicParsing="false" text="View" />
+            <Button fx:id="playlistView_btn" layoutX="188.0" layoutY="270.0" mnemonicParsing="false" onAction="#viewPlaylistDetails" text="View" />
             <Label fx:id="playlist_detailsLabel" layoutX="120.0" layoutY="274.0" text="View Playlist" />
          </children>
       </Pane>
