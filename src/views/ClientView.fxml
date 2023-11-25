@@ -37,7 +37,7 @@
       </Pane>
       <Pane fx:id="allsongs_panel" layoutX="155.0" layoutY="37.0" prefHeight="354.0" prefWidth="445.0" visible="false">
          <children>
-            <TableView fx:id="songs_tableview" fixedCellSize="20.0" layoutY="21.0" prefHeight="328.0" prefWidth="439.0" visible="false">
+            <TableView fx:id="songs_tableview" fixedCellSize="20.0" layoutY="21.0" prefHeight="328.0" prefWidth="439.0">
               <columns>
                 <TableColumn fx:id="title_column" prefWidth="167.99996948242188" text="Title" />
                 <TableColumn fx:id="album_column" prefWidth="107.3333740234375" text="Album" />

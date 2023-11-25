@@ -49,6 +49,7 @@ public class ClientController {
 		conn = new DBConnect();
 	}
 	
+	@FXML
 	public void displaySongs() {
 		playlist_panel.setVisible(false);
 		panel1.setVisible(false);
@@ -56,6 +57,7 @@ public class ClientController {
 		playlists_panel.setVisible(false);
 	}
 	
+	@FXML
 	public void createPlaylist_click() {
 		playlist_panel.setVisible(true);
 		panel1.setVisible(false);
@@ -63,6 +65,7 @@ public class ClientController {
 		playlists_panel.setVisible(false);
 	}
 	
+	@FXML
 	public void displayPlaylist_panel() {
 		playlist_panel.setVisible(false);
 		panel1.setVisible(false);
@@ -70,6 +73,7 @@ public class ClientController {
 		playlists_panel.setVisible(true);
 	}
 	
+	@FXML
 	public void createPlaylist() {
 		// INSERT INTO Playlist TABLE
 				try {
@@ -105,37 +109,12 @@ public class ClientController {
 				se.printStackTrace();
 				}
 	}
-/*
+
 	
-	@FXML
-    private TableView songs_tableview;
-
-    @FXML
-    private TableColumn title_column;
-
-    @FXML
-    private TableColumn album_column;
-
-    @FXML
-    private TableColumn artist_column;
-	public void displaySongs() {
-		System.out.println("Displaying all songs from songs table...");
-		try {
-			stmt = conn.getConnection().createStatement();
-			String sql = null;
-			sql= "SELECT * FROM beatmusic_songs";
-			myRs = stmt.executeQuery(sql);
-			
-			
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-	*/
+	/*
+	 * Code for displaying all songs
+	 * Creating a table view to display the list of sons and details
+	 */
 	
 	@FXML
     private TableView<SongModel> songs_tableview;
