@@ -4,18 +4,19 @@ import java.util.List;
 
 public class PlaylistModel {
     private String playlistName;
-    private UserModel owner;
-    private List<SongModel> songs;
+    private int userId;
+    private List<Integer> songIds;
+    //private int songId;
+    
+    
+    //private List<SongModel> songs;
 
-    public PlaylistModel(String playlistName, UserModel owner) {
+    public PlaylistModel(String playlistName, int userId, List<Integer> songIds) {
         this.playlistName = playlistName;
-        this.owner = owner;
-        this.songs = new ArrayList<>();
+        this.userId = userId;
+        this.songIds = songIds;
     }
     
-    public PlaylistModel(String playlistName) {
-    	this.playlistName = playlistName;
-    }
     // Getters and setters
 
     public String getPlaylistName() {
@@ -26,23 +27,29 @@ public class PlaylistModel {
         this.playlistName = playlistName;
     }
 
-    public UserModel getOwner() {
-        return owner;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setOwner(UserModel owner) {
-        this.owner = owner;
+    public void setUserId(int UserId) {
+        this.userId = UserId;
     }
 
-    public List<SongModel> getSongs() {
-        return songs;
+    public List<Integer> getSongIds() {
+        return songIds;
     }
 
-    public void setSongs(List<SongModel> songs) {
-        this.songs = songs;
+    public void setSongIds(List<Integer> songIds ) {
+        this.songIds = songIds;
+    }
+    
+    @Override
+    public String toString() {
+        return playlistName;
     }
 
     // Methods
+    /*
     public void addSong(SongModel song) {
         songs.add(song);
     }
@@ -58,4 +65,5 @@ public class PlaylistModel {
         }
         return totalDuration;
     }
+    */
 }
