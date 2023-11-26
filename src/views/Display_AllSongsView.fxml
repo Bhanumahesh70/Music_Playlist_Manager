@@ -9,9 +9,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Display_AllSongsController">
    <children>
-      <Pane fx:id="allsongs_panel" layoutX="107.0" layoutY="20.0" prefHeight="354.0" prefWidth="437.0">
+      <Pane fx:id="allsongs_panel" layoutX="108.0" prefHeight="400.0" prefWidth="437.0">
          <children>
-            <TableView fx:id="songs_tableview" layoutX="14.0" layoutY="45.0" prefHeight="309.0" prefWidth="421.0">
+            <TableView fx:id="songs_tableview" layoutX="14.0" layoutY="45.0" prefHeight="291.0" prefWidth="421.0">
               <columns>
                 <TableColumn fx:id="title_column" prefWidth="139.99996948242188" text="Title" />
                 <TableColumn fx:id="album_column" prefWidth="68.0" text="Album" />
@@ -20,8 +20,10 @@
               </columns>
             </TableView>
             <Label fx:id="label" layoutX="167.0" layoutY="20.0" text="All Songs" />
-            <Button fx:id="backButton" layoutX="21.0" layoutY="16.0" mnemonicParsing="false" onAction="#displayHome" text="Back" />
+            <Button layoutX="173.0" layoutY="343.0" mnemonicParsing="false" onAction="#playButtonClicked" text="Play" />
+            <Label fx:id="songPlaying_Label" layoutX="124.0" layoutY="378.0" prefHeight="17.0" prefWidth="313.0" text="Select a song to play" />
          </children>
       </Pane>
+      <Button fx:id="backButton" layoutX="14.0" layoutY="25.0" mnemonicParsing="false" onAction="#displayHome" text="Home" />
    </children>
 </AnchorPane>

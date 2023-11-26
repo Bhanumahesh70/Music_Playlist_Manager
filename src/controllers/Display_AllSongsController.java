@@ -12,6 +12,7 @@ import application.Main;
 import dao.DBConnect;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,7 +26,7 @@ import models.SongModel;
 public class Display_AllSongsController {
 	/*
 	 * Code for displaying all songs Creating a table view to display the list of
-	 * sons and details
+	 * songs and details
 	 */
 
 	@FXML
@@ -33,6 +34,9 @@ public class Display_AllSongsController {
 	
 	@FXML
 	private Label label;
+	
+	@FXML
+	private Label songPlaying_Label;
 	
 	@FXML
 	private TableView<SongModel> songs_tableview;
@@ -72,6 +76,19 @@ public class Display_AllSongsController {
 				e.printStackTrace();
 			}
 		}
+		
+		@FXML
+	    public void playButtonClicked(ActionEvent event) {
+	        // Get the selected song from the TableView
+	        SongModel selectedSong = songs_tableview.getSelectionModel().getSelectedItem();
+
+	        // Update the label with the selected song information
+	        if (selectedSong != null) {
+	        	songPlaying_Label.setText("Now Playing: " + selectedSong.getTitle());
+	        } else {
+	        	//songPlaying_Label.setText("No song selected");
+	        }
+	    }
 	@FXML
 	public void initialize() {
 		title_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));

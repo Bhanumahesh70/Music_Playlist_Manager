@@ -7,24 +7,28 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Display_PlaylistsController">
    <children>
-      <Pane fx:id="playlists_panel" layoutX="163.0" layoutY="87.0" prefHeight="295.0" prefWidth="411.0">
+      <Pane fx:id="playlists_panel" layoutX="146.0" layoutY="74.0" prefHeight="312.0" prefWidth="411.0">
          <children>
-            <ListView fx:id="playlist_listview" layoutX="39.0" prefHeight="238.0" prefWidth="244.0" />
-            <Label layoutX="46.0" layoutY="242.0" prefHeight="17.0" prefWidth="244.0" text="Click on the playlists to display songs" textFill="#ed1717" />
+            <ListView fx:id="playlist_listview" layoutX="120.0" layoutY="14.0" prefHeight="238.0" prefWidth="109.0" />
+            <Label layoutX="75.0" layoutY="290.0" prefHeight="17.0" prefWidth="244.0" text="Click on the playlists to display songs" textFill="#ed1717" />
+            <Button layoutX="147.0" layoutY="259.0" mnemonicParsing="false" onAction="#submitButtonClicked" text="Submit" />
          </children>
       </Pane>
       <Pane layoutX="192.0" layoutY="19.0" prefHeight="55.0" prefWidth="256.0">
          <children>
-            <Button fx:id="backButton" layoutX="13.0" layoutY="24.0" mnemonicParsing="false" onAction="#displayHome" text="Button" />
-            <Label layoutX="102.0" layoutY="25.0" text="Playlists" />
+            <Label layoutX="88.0" layoutY="28.0" text="Playlists" textFill="#1a37f6">
+               <font>
+                  <Font name="Bell MT" size="23.0" />
+               </font></Label>
          </children>
       </Pane>
-      <Pane fx:id="displaySongs_Panel" layoutX="136.0" layoutY="78.0" prefHeight="295.0" prefWidth="422.0" visible="false">
+      <Pane fx:id="displaySongs_Panel" layoutX="136.0" layoutY="78.0" prefHeight="319.0" prefWidth="422.0" visible="false">
          <children>
-            <TableView fx:id="songs_tableview" layoutX="21.0" layoutY="30.0" prefHeight="253.0" prefWidth="387.0">
+            <TableView fx:id="songs_tableview" layoutX="17.0" layoutY="14.0" prefHeight="253.0" prefWidth="387.0">
               <columns>
                 <TableColumn fx:id="title_column" prefWidth="132.66665649414062" text="Title" />
                 <TableColumn fx:id="album_column" prefWidth="85.33331298828125" text="Album" />
@@ -32,7 +36,9 @@
                   <TableColumn fx:id="duration_column" prefWidth="62.66668701171875" text="Duration" />
               </columns>
             </TableView>
+            <Button layoutX="170.0" layoutY="280.0" mnemonicParsing="false" onAction="#back" text="Back" />
          </children>
       </Pane>
+      <Button fx:id="backButton" layoutX="9.0" layoutY="23.0" mnemonicParsing="false" onAction="#displayHome" text="Home" />
    </children>
 </AnchorPane>

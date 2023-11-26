@@ -49,11 +49,12 @@ public class PlaylistModel {
     }
 
     // Methods
-    /*
-    public void addSong(SongModel song) {
-        songs.add(song);
+   
+    public void addSongId(int song) {
+    	songIds.add(song);
     }
 
+    /*
     public void removeSong(SongModel song) {
         songs.remove(song);
     }

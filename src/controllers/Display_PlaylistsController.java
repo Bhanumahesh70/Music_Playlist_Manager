@@ -61,6 +61,27 @@ public class Display_PlaylistsController extends ClientController{
 		}
 	}
 	
+	@FXML
+    private void submitButtonClicked() {
+        // Get the selected playlist from the ListView
+        PlaylistModel selectedPlaylist = playlist_listview.getSelectionModel().getSelectedItem();
+
+        // Perform the action based on the selected playlist
+        if (selectedPlaylist != null) {
+            // Call the method or perform actions based on the selected playlist
+            viewPlaylistDetails(selectedPlaylist);
+        } else {
+            // Handle the case when no playlist is selected
+            System.out.println("No playlist selected");
+        }
+    }
+	
+	@FXML
+	public void back() {
+		displaySongs_Panel.setVisible(false);
+		playlists_panel.setVisible(true);
+	}
+	
 		@FXML
 		private ListView<PlaylistModel> playlist_listview;
 
@@ -89,8 +110,8 @@ public class Display_PlaylistsController extends ClientController{
 			System.out.println("Displaying Playlists");
 			playlist_listview.getItems().clear(); // Clear existing items
 			playlist_listview.getItems().addAll( playlists);
-			playlist_listview.getSelectionModel().selectedItemProperty()
-	        .addListener((observable, oldPlaylist, newPlaylist) -> viewPlaylistDetails(newPlaylist));
+			//playlist_listview.getSelectionModel().selectedItemProperty()
+	        //.addListener((observable, oldPlaylist, newPlaylist) -> viewPlaylistDetails(newPlaylist));
 		}
 
 		List<PlaylistModel> fetch_PlaylistFrom_Database() {
@@ -106,14 +127,26 @@ public class Display_PlaylistsController extends ClientController{
 				sql = "SELECT * FROM beatmusic_playlist WHERE user_id=" + userId;
 				myRs = stmt.executeQuery(sql);
 				
-				List<Integer> songIds = new ArrayList<Integer>();
+				
 				while (myRs.next()) {
 					String playlistName = myRs.getString("playlist_name");
 					int userId = myRs.getInt("user_id");
 					int songId = myRs.getInt("song_id");
-					songIds.add(songId);
+					//songIds.add(songId);
+					boolean playlistPresent = false;
+					for(PlaylistModel playlist: playlists) {
+						if(playlist.getPlaylistName().equals(playlistName)){
+							playlist.addSongId(songId);
+							playlistPresent = true;
+							break;
+						}
+					}
+					if(!playlistPresent) {
+						List<Integer> songIds = new ArrayList<Integer>();
+						songIds.add(songId);
 					playlists.add(new PlaylistModel(playlistName,userId,songIds));
-					
+					}
+				
 				}
 				stmt.close();
 				myRs.close();
@@ -145,6 +178,7 @@ public class Display_PlaylistsController extends ClientController{
 			displaySongs_Panel.setVisible(true);
 			playlists_panel.setVisible(false);
 			
+			songs_tableview.getItems().clear();
 			if (playlist != null) {
 				title_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
 				artist_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getArtist()));
@@ -162,6 +196,7 @@ public class Display_PlaylistsController extends ClientController{
 					songsFromPlaylist.add(fetchSongsFromPlaylist(i));
 				}
 				// Populate the TableView with data
+				songs_tableview.getItems().clear();
 				songs_tableview.getItems().addAll(songsFromPlaylist);
 				System.out.println("Displaying all songs");
 			} else {
