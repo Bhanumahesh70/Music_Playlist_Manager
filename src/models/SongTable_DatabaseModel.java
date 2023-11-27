@@ -11,11 +11,12 @@ import java.sql.Statement;
 
 public class SongTable_DatabaseModel {
 
-    public static ObservableList<SongModel> fetchSongsFromDatabase() throws SQLException {
+    public static ObservableList<SongModel> fetchSongsFromDatabase() {
         ObservableList<SongModel> songs = FXCollections.observableArrayList();
 
-        try (PreparedStatement stmt = DBConnect.getConnection().prepareStatement("SELECT * FROM beatmusic_songs");
-             ResultSet rs = stmt.executeQuery()) {
+        try  {
+        	PreparedStatement stmt = DBConnect.getConnection().prepareStatement("SELECT * FROM beatmusic_songs");
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 String title = rs.getString("title");
@@ -25,7 +26,10 @@ public class SongTable_DatabaseModel {
 
                 songs.add(new SongModel(title, artist, album, duration));
             }
-        }
+        } catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
         return songs;
     }

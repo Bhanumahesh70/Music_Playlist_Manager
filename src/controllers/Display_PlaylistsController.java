@@ -64,7 +64,7 @@ public class Display_PlaylistsController extends ClientController{
 	// Get user details
 	int userId = ClientController.getUser();
 
-	// Going back to home when back button is pressed
+	// Going back to home when Home button is pressed
 	@FXML
 	public void displayHome() {
 		try {
@@ -105,12 +105,7 @@ public class Display_PlaylistsController extends ClientController{
 			
 			//get playlist details from database 
 			List<PlaylistModel> playlists = null;
-			try {
-				playlists = PlaylistTable_DatabaseModel.fetchPlaylistsFromDatabase(userId);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			playlists = PlaylistTable_DatabaseModel.fetchPlaylistsFromDatabase(userId);
 			
 			//Display the playlist titles trough the list view
 			System.out.println("Displaying Playlists");
@@ -124,6 +119,7 @@ public class Display_PlaylistsController extends ClientController{
 			playlists_panel.setVisible(false);
 			
 			songs_tableview.getItems().clear();
+			
 			if (playlist != null) {
 				title_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
 				artist_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getArtist()));

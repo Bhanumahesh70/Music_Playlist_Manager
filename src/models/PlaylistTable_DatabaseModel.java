@@ -10,47 +10,51 @@ import java.util.List;
 
 public class PlaylistTable_DatabaseModel {
 
-    public static List<PlaylistModel> fetchPlaylistsFromDatabase(int userId) throws SQLException {
-        List<PlaylistModel> playlists = new ArrayList<>();
+	public static List<PlaylistModel> fetchPlaylistsFromDatabase(int userId)  {
+		List<PlaylistModel> playlists = new ArrayList<>();
 
-        try (PreparedStatement stmt = DBConnect.getConnection().prepareStatement(
-                "SELECT * FROM beatmusic_playlist WHERE user_id = ?")) {
+		try  {
+			
+			PreparedStatement stmt = DBConnect.getConnection().prepareStatement("SELECT * FROM beatmusic_playlist WHERE user_id = ?");
 
-            stmt.setInt(1, userId);
+			stmt.setInt(1, userId);
 
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    String playlistName = rs.getString("playlist_name");
-                    int songId = rs.getInt("song_id");
+			ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					String playlistName = rs.getString("playlist_name");
+					int songId = rs.getInt("song_id");
 
-                    boolean playlistPresent = false;
-                    for (PlaylistModel playlist : playlists) {
-                        if (playlist.getPlaylistName().equals(playlistName)) {
-                            playlist.addSongId(songId);
-                            playlistPresent = true;
-                            break;
-                        }
-                    }
-                    if (!playlistPresent) {
-                        List<Integer> songIds = new ArrayList<>();
-                        songIds.add(songId);
-                        playlists.add(new PlaylistModel(playlistName, userId, songIds));
-                    }
-                }
-            }
-        }
+					boolean playlistPresent_inList = false;
+					for (PlaylistModel playlist : playlists) {
+						if (playlist.getPlaylistName().equals(playlistName)) {
+							playlist.addSongId(songId);
+							playlistPresent_inList = true;
+							break;
+						}
+					}
+					if (!playlistPresent_inList) {
+						List<Integer> songIds = new ArrayList<>();
+						songIds.add(songId);
+						playlists.add(new PlaylistModel(playlistName, userId, songIds));
+					}
+				}
+			}
+		 catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-        return playlists;
-    }
-    
+		return playlists;
+	}
 
-	public static List<SongModel> fetchSongsFromPlaylist(PlaylistModel playlist){
+	public static List<SongModel> fetchSongsFromPlaylist(PlaylistModel playlist) {
 		List<SongModel> songsFromPlaylist = new ArrayList<SongModel>();
 		List<Integer> songIds = playlist.getSongIds();
 		for (int i : songIds) {
 			songsFromPlaylist.add(SongTable_DatabaseModel.fetchSongFromDatabase(i));
 		}
-		
+
 		return songsFromPlaylist;
 	}
+
 }
