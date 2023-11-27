@@ -20,7 +20,7 @@ public class LoginModel extends DBConnect {
 	public Boolean getCredentials(String username, String password){
            
            String query = "SELECT * FROM beatmusic_users WHERE username = ? and password = ?;";
-            try(PreparedStatement stmt = connection.prepareStatement(query)) {
+            try(PreparedStatement stmt = getConnection().prepareStatement(query)) {
                stmt.setString(1, username);
                stmt.setString(2, password);
                ResultSet rs = stmt.executeQuery();

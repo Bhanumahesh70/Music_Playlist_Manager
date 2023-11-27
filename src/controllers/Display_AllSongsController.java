@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import models.SongModel;
+import models.SongTable_DatabaseModel;
 
 public class Display_AllSongsController {
 	/*
@@ -89,6 +90,7 @@ public class Display_AllSongsController {
 	        	//songPlaying_Label.setText("No song selected");
 	        }
 	    }
+		
 	@FXML
 	public void initialize() {
 		title_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
@@ -98,42 +100,17 @@ public class Display_AllSongsController {
 				cellData -> new SimpleIntegerProperty(cellData.getValue().getDuration()).asObject());
 
 		// Connect to the database and retrieve data
-		List<SongModel> songs = fetchDataFromDatabase();
+		List<SongModel> songs = null;
+		try {
+			songs = SongTable_DatabaseModel.fetchSongsFromDatabase();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Populate the TableView with data
 		songs_tableview.getItems().addAll(songs);
 		System.out.println("Displaying all songs");
 	}
 
-	private List<SongModel> fetchDataFromDatabase() {
-		List<SongModel> songs = new ArrayList<>();
-
-		// TODO: Connect to your database
-		try {
-
-			System.out.println("Fetching all songs from songs table in database");
-			stmt = conn.getConnection().createStatement();
-			String sql = null;
-			sql = "SELECT * FROM beatmusic_songs";
-			myRs = stmt.executeQuery(sql);
-
-			while (myRs.next()) {
-				String title = myRs.getString("title");
-				String artist = myRs.getString("artist");
-				String album = myRs.getString("album");
-				int duration = myRs.getInt("duration");
-
-				songs.add(new SongModel(title, artist, album, duration));
-				
-			}
-			stmt.close();
-			myRs.close();
-			//conn.getConnection().close();
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		
-		return songs;
-	}
 }
