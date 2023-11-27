@@ -1,15 +1,9 @@
 package controllers;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
-
 import application.Main;
-import dao.DBConnect;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -26,7 +20,6 @@ import javafx.scene.layout.Pane;
 import models.PlaylistModel;
 import models.PlaylistTable_DatabaseModel;
 import models.SongModel;
-import models.SongTable_DatabaseModel;
 
 /*
  * Code for displaying all Playlists. Creating a List view to display the list
@@ -138,15 +131,7 @@ public class Display_PlaylistsController extends ClientController{
 				duration_column.setCellValueFactory(
 						cellData -> new SimpleIntegerProperty(cellData.getValue().getDuration()).asObject());
 				
-				List<Integer> songIds = playlist.getSongIds();
-				
-				// Connect to the database and retrieve data
-				List<SongModel> songsFromPlaylist = new ArrayList<SongModel>();
-				
-				System.out.println("Fetching the songs from the playlist table in database");
-				for (int i : songIds) {
-					songsFromPlaylist.add(SongTable_DatabaseModel.fetchSongsFromPlaylist(i));
-				}
+				List<SongModel> songsFromPlaylist= PlaylistTable_DatabaseModel.fetchSongsFromPlaylist(playlist);
 				// Populate the TableView with data
 				songs_tableview.getItems().clear();
 				songs_tableview.getItems().addAll(songsFromPlaylist);
@@ -156,14 +141,4 @@ public class Display_PlaylistsController extends ClientController{
 				songDeatils_textArea.setText("Select a playlist");
 			}
 		}	
-		/*
-		List<SongModel> FetchSongsFromPlaylist(List<Integer> songIds){
-			List<SongModel> songsFromPlaylist = new ArrayList<SongModel>();
-			for (int i : songIds) {
-				songsFromPlaylist.add(SongTable_DatabaseModel.fetchSongsFromPlaylist(i));
-			}
-			
-			return songsFromPlaylist;
-		}
-		*/
 }

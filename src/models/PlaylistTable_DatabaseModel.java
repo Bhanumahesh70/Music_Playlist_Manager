@@ -42,4 +42,15 @@ public class PlaylistTable_DatabaseModel {
 
         return playlists;
     }
+    
+
+	public static List<SongModel> fetchSongsFromPlaylist(PlaylistModel playlist){
+		List<SongModel> songsFromPlaylist = new ArrayList<SongModel>();
+		List<Integer> songIds = playlist.getSongIds();
+		for (int i : songIds) {
+			songsFromPlaylist.add(SongTable_DatabaseModel.fetchSongFromDatabase(i));
+		}
+		
+		return songsFromPlaylist;
+	}
 }

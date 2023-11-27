@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
 
 public class SongTable_DatabaseModel {
 
@@ -31,8 +30,8 @@ public class SongTable_DatabaseModel {
         return songs;
     }
     
-    public static SongModel fetchSongsFromPlaylist(int song_id) {
-		SongModel songsFromPlaylist = null;
+    public static SongModel fetchSongFromDatabase(int song_id) {
+		SongModel song = null;
 
 		// TODO: Connect to your database
 		try {
@@ -47,7 +46,7 @@ public class SongTable_DatabaseModel {
 				String album = myRs.getString("album");
 				int duration = myRs.getInt("duration");
 
-				songsFromPlaylist = new SongModel(title, artist, album, duration);
+				song = new SongModel(title, artist, album, duration);
 				
 				//conn.getConnection().close();
 			}
@@ -57,6 +56,6 @@ public class SongTable_DatabaseModel {
 			e.printStackTrace();
 		}
 
-		return songsFromPlaylist;
+		return song;
 	}
 }
