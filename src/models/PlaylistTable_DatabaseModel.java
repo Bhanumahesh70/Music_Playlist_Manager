@@ -5,6 +5,7 @@ import dao.DBConnect;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,21 +101,45 @@ public class PlaylistTable_DatabaseModel {
 		insertIntoPlaylistDatabase(playlistName,user_id,song_id);
 	}
 	
+	public static boolean isPlaylistPresent(String playlistName, int user_id) {
+		boolean isPlaylistPresent =false;
+		try {
+			String sql = "SELECT * FROM beatmusic_playlist";
+			Statement stmt = DBConnect.getConnection().createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				String playlist_name= rs.getString("playlist_name");
+				if(playlist_name.equals(playlistName)){
+					isPlaylistPresent =true;
+					break;
+				}
+			}
+			stmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return isPlaylistPresent;
+		
+	}
 	public static boolean isPlaylistEmpty(String playlistName,int userId) {
 		boolean isEmptyPlaylist = false;
 		try {
 			String sql = "SELECT * FROM beatmusic_playlist WHERE playlist_name=? AND user_id =?";
 			PreparedStatement stmt = DBConnect.getConnection().prepareStatement(sql);
 			stmt.setString(1, playlistName);
-			stmt.setInt(1, userId);
+			stmt.setInt(2, userId);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
 				int song_id = rs.getInt("song_id");
 				if(song_id==-1)
 				{
 					isEmptyPlaylist = true;		
+					System.out.println("The playlist is empty");
 				}
 				else {
+					System.out.println("The playlist is not empty");
 					break;
 				}
 			}
@@ -126,6 +151,33 @@ public class PlaylistTable_DatabaseModel {
 		}
 		return isEmptyPlaylist;
 	}
+	
+	public static boolean isSongPresentinPlaylist(String playlistName,int userId, int songId) {
+		boolean isSongPresentinPlaylist = false;
+		try {
+			String sql = "SELECT * FROM beatmusic_playlist WHERE playlist_name=? AND user_id =?";
+			PreparedStatement stmt = DBConnect.getConnection().prepareStatement(sql);
+			stmt.setString(1, playlistName);
+			stmt.setInt(2, userId);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				int song_id = rs.getInt("song_id");
+				if(song_id== songId)
+				{
+					isSongPresentinPlaylist = true;		
+					System.out.println("The song is present in the playlist");
+					break;
+				}
+			}
+			stmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return isSongPresentinPlaylist;
+	}
+	
 	
 	
 	

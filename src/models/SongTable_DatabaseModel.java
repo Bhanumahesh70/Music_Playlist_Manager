@@ -23,8 +23,9 @@ public class SongTable_DatabaseModel {
 				String artist = rs.getString("artist");
 				String album = rs.getString("album");
 				int duration = rs.getInt("duration");
+				int id = rs.getInt("song_id");
 
-				songs.add(new SongModel(title, artist, album, duration));
+				songs.add(new SongModel(title, artist, album, duration,id));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -49,8 +50,9 @@ public class SongTable_DatabaseModel {
 				String artist = myRs.getString("artist");
 				String album = myRs.getString("album");
 				int duration = myRs.getInt("duration");
+				int id = myRs.getInt("song_id");
 
-				song = new SongModel(title, artist, album, duration);
+				song = new SongModel(title, artist, album, duration,id);
 
 				// conn.getConnection().close();
 			}

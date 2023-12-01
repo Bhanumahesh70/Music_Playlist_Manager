@@ -4,13 +4,15 @@ public class SongModel {
     private String title;
     private String artist;
     private String album;
-    private int duration;  // Duration in seconds
+    private int duration; // Duration in seconds
+    private int id;
 
-    public SongModel(String title, String artist, String album, int duration) {
+    public SongModel(String title, String artist, String album, int duration, int id) {
         this.title = title;
         this.artist = artist;
         this.album = album;
         this.duration = duration;
+        this.id = id;
     }
 
     // Getters and setters
@@ -44,5 +46,13 @@ public class SongModel {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

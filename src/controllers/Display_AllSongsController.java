@@ -87,7 +87,7 @@ public class Display_AllSongsController {
 	        if (selectedSong != null) {
 	        	songPlaying_Label.setText("Now Playing: " + selectedSong.getTitle());
 	        } else {
-	        	//songPlaying_Label.setText("No song selected");
+	        	songPlaying_Label.setText("No song is selected");
 	        }
 	    }
 		
