@@ -139,7 +139,7 @@ public class Create_PlaylistController extends ClientController {
         	}else {
       
         		addSongLabel.setText("The song '" + selectedSong.getTitle()+"'\nis added to the playlist");
-            	PlaylistTable_DatabaseModel.addSongToPlaylist(playlistName,userId,songId);
+            	PlaylistTable_DatabaseModel.addSongToPlaylist(playlistName,songId,userId);
         	}
         	
         } else {

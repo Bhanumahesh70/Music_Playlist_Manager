@@ -139,10 +139,10 @@ public class PlaylistTable_DatabaseModel {
 				if(song_id==-1)
 				{
 					isEmptyPlaylist = true;		
-					System.out.println("The playlist is empty");
+					System.out.println("The playlist is empty from db");
 				}
 				else {
-					System.out.println("The playlist is not empty");
+					System.out.println("The playlist is not empty from db");
 					break;
 				}
 			}

@@ -6,6 +6,7 @@ import java.util.List;
 import application.Main;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ import javafx.scene.layout.Pane;
 import models.PlaylistModel;
 import models.PlaylistTable_DatabaseModel;
 import models.SongModel;
+import models.SongTable_DatabaseModel;
 
 /*
  * Code for displaying all Playlists. Creating a List view to display the list
@@ -35,6 +37,15 @@ public class Display_PlaylistsController extends ClientController {
 
 	@FXML
 	private Label playlist_detailsLabel;
+	
+	@FXML
+	private Label myPlaylistLabel;
+	
+	@FXML
+	private Label emptyPlaylistLabel;
+	
+	@FXML
+	private Label songAddedLabel;
 
 	@FXML
 	private TextArea songDeatils_textArea;
@@ -44,6 +55,24 @@ public class Display_PlaylistsController extends ClientController {
 
 	@FXML
 	private Pane playlists_panel;
+	
+	@FXML
+	private Pane addSongsPane;
+
+	@FXML
+	private TableView<SongModel> PlaylistSongs_tableview;
+
+	@FXML
+	private TableColumn<SongModel, String> PlaylistTitle_column;
+
+	@FXML
+	private TableColumn<SongModel, String> PlaylistArtist_column;
+
+	@FXML
+	private TableColumn<SongModel, String> PlaylistAlbum_column;
+
+	@FXML
+	private TableColumn<SongModel, Integer> PlaylistDuration_column;
 
 	@FXML
 	private TableView<SongModel> songs_tableview;
@@ -59,7 +88,17 @@ public class Display_PlaylistsController extends ClientController {
 
 	@FXML
 	private TableColumn<SongModel, Integer> duration_column;
-
+	
+	// declaring a variable to get which playlist the user has selected 
+	PlaylistModel selected_Playlist;
+	
+	//getter and setter methods for user selected playlist
+	private void setSelectedPlaylist(PlaylistModel playlist) {
+		selected_Playlist = playlist;
+	}
+	private PlaylistModel getSelectedPlaylist() {
+		return selected_Playlist;
+	}
 	// Get user details
 	int userId = ClientController.getUser();
 
@@ -97,8 +136,15 @@ public class Display_PlaylistsController extends ClientController {
 	public void back() {
 		displaySongs_Panel.setVisible(false);
 		playlists_panel.setVisible(true);
+		addSongsPane.setVisible(false);
+		myPlaylistLabel.setText("My Playlists");
 	}
-
+	@FXML
+	public void backToplaylist() {
+		PlaylistModel playlist = getSelectedPlaylist();
+		viewPlaylistDetails(playlist);
+		
+	}
 	@FXML
 	public void initialize() {
 
@@ -116,30 +162,107 @@ public class Display_PlaylistsController extends ClientController {
 
 		displaySongs_Panel.setVisible(true);
 		playlists_panel.setVisible(false);
+		addSongsPane.setVisible(false);
 
 		if (playlist != null) {
-
+			
+			// set the selected playlist variable with user selected playlist
+			setSelectedPlaylist(playlist);
 			String playlistName = playlist.getPlaylistName();
-			songs_tableview.getItems().clear();
+			//PlaylistSongs_tableview.getItems().clear();
+			myPlaylistLabel.setText(playlistName);
+			PlaylistSongs_tableview.getItems().clear();
 
 			if (!PlaylistTable_DatabaseModel.isPlaylistEmpty(playlistName, userId)) {
 
-				title_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
-				artist_column
+				PlaylistTitle_column.setCellValueFactory(cellData -> {
+	                if (cellData.getValue() != null && cellData.getValue().getTitle() != null) {
+	                    return new SimpleStringProperty(cellData.getValue().getTitle());
+	                } else {
+	                    return new SimpleStringProperty("");
+	                }
+						
+			});
+				PlaylistArtist_column
 						.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getArtist()));
-				album_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAlbum()));
-				duration_column.setCellValueFactory(
+				PlaylistAlbum_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAlbum()));
+				PlaylistDuration_column.setCellValueFactory(
 						cellData -> new SimpleIntegerProperty(cellData.getValue().getDuration()).asObject());
 
 				List<SongModel> songsFromPlaylist = PlaylistTable_DatabaseModel.fetchSongsFromPlaylist(playlist);
 				// Populate the TableView with data
-				songs_tableview.getItems().clear();
-				songs_tableview.getItems().addAll(songsFromPlaylist);
-				System.out.println("Displaying all songs");
+				PlaylistSongs_tableview.getItems().clear();
+				PlaylistSongs_tableview.getItems().addAll(songsFromPlaylist);
+				System.out.println("Displaying the songs from the playlist '"+playlistName+"'");
+				emptyPlaylistLabel.setText(" ");
+				
+			}
+			else {
+				emptyPlaylistLabel.setText("The playlist is empty from disp ply");
 			}
 		} else {
 			playlist_detailsLabel.setText("Please select a playlist to view details.");
 			songDeatils_textArea.setText("Select a playlist");
 		}
 	}
+	
+	@FXML
+	public void addSongsClicked() {
+		displaySongs_Panel.setVisible(false);
+		playlists_panel.setVisible(false);
+		addSongsPane.setVisible(true);
+		displayAllSongs();
+	}
+	
+	public void displayAllSongs() {
+		
+		songs_tableview.getItems().clear();
+		title_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
+		artist_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getArtist()));
+		album_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAlbum()));
+		duration_column.setCellValueFactory(
+				cellData -> new SimpleIntegerProperty(cellData.getValue().getDuration()).asObject());
+
+		// Connect to the database and retrieve data
+		List<SongModel> songs = null;
+		try {
+			songs = SongTable_DatabaseModel.fetchSongsFromDatabase();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// Populate the TableView with data
+		songs_tableview.getItems().addAll(songs);
+		System.out.println("Displaying all songs to add to playlist");
+		
+	}
+	
+	@FXML
+	public void addSongToPlaylistClick(ActionEvent event) {
+        // Get the selected song from the TableView
+        SongModel selectedSong = songs_tableview.getSelectionModel().getSelectedItem();
+
+        // Update the label with the selected song information
+        if (selectedSong != null) {
+        	
+        	//Get the user selected playlist
+        	PlaylistModel playlist = getSelectedPlaylist();
+        	String playlistName = playlist.getPlaylistName();
+        	int songId = selectedSong.getId();
+        	
+        	if(PlaylistTable_DatabaseModel.isSongPresentinPlaylist(playlistName,userId,songId)) {
+        		
+        		songAddedLabel.setText("The song '" + selectedSong.getTitle()+"'\nis already in the playlist");
+        		
+        	}else {
+      
+        		songAddedLabel.setText("The song '" + selectedSong.getTitle()+"'\nis added to the playlist");
+            	PlaylistTable_DatabaseModel.addSongToPlaylist(playlistName,songId,userId);
+        	}
+        	
+        } else {
+        	songAddedLabel.setText("No song is selected");
+        }
+    }
 }

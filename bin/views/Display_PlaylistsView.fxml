@@ -20,25 +20,42 @@
       </Pane>
       <Pane layoutX="192.0" layoutY="19.0" prefHeight="55.0" prefWidth="256.0">
          <children>
-            <Label layoutX="88.0" layoutY="28.0" text="Playlists" textFill="#1a37f6">
+            <Label fx:id="myPlaylistLabel" layoutX="61.0" layoutY="28.0" text="My Playlists" textFill="#1a37f6">
                <font>
                   <Font name="Bell MT" size="23.0" />
                </font></Label>
          </children>
       </Pane>
-      <Pane fx:id="displaySongs_Panel" layoutX="136.0" layoutY="78.0" prefHeight="319.0" prefWidth="422.0" visible="false">
+      <Pane fx:id="displaySongs_Panel" layoutX="9.0" layoutY="74.0" prefHeight="319.0" prefWidth="600.0" visible="false">
          <children>
-            <TableView fx:id="songs_tableview" layoutX="17.0" layoutY="14.0" prefHeight="253.0" prefWidth="387.0">
+            <TableView fx:id="PlaylistSongs_tableview" layoutX="141.0" layoutY="14.0" prefHeight="253.0" prefWidth="387.0">
               <columns>
-                <TableColumn fx:id="title_column" prefWidth="132.66665649414062" text="Title" />
-                <TableColumn fx:id="album_column" prefWidth="85.33331298828125" text="Album" />
-                  <TableColumn fx:id="artist_column" text="Artist" />
-                  <TableColumn fx:id="duration_column" prefWidth="62.66668701171875" text="Duration" />
+                <TableColumn fx:id="PlaylistTitle_column" prefWidth="132.66665649414062" text="Title" />
+                <TableColumn fx:id="PlaylistAlbum_column" prefWidth="85.33331298828125" text="Album" />
+                  <TableColumn fx:id="PlaylistArtist_column" text="Artist" />
+                  <TableColumn fx:id="PlaylistDuration_column" prefWidth="62.66668701171875" text="Duration" />
               </columns>
             </TableView>
-            <Button layoutX="170.0" layoutY="280.0" mnemonicParsing="false" onAction="#back" text="Back" />
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="74.0" text="Back" />
+            <Label fx:id="emptyPlaylistLabel" layoutX="282.0" layoutY="288.0" text="The Playlist is empty" />
+            <Button layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#addSongsClicked" text="Add Songs" />
          </children>
       </Pane>
       <Button fx:id="backButton" layoutX="9.0" layoutY="23.0" mnemonicParsing="false" onAction="#displayHome" text="Home" />
+      <Pane fx:id="addSongsPane" layoutX="-7.0" layoutY="67.0" prefHeight="332.0" prefWidth="600.0" visible="false">
+         <children>
+            <Button layoutX="23.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToplaylist" prefHeight="25.0" prefWidth="74.0" text="Back" />
+            <TableView fx:id="songs_tableview" layoutX="160.0" layoutY="6.0" prefHeight="253.0" prefWidth="369.0">
+              <columns>
+                <TableColumn fx:id="title_column" prefWidth="121.33332824707031" text="Title" />
+                <TableColumn fx:id="album_column" prefWidth="84.66668701171875" text="Album" />
+                  <TableColumn fx:id="artist_column" prefWidth="90.6666259765625" text="Artist" />
+                  <TableColumn fx:id="duration_column" minWidth="6.0" prefWidth="67.99996948242188" text="Duration" />
+              </columns>
+            </TableView>
+            <Button layoutX="267.0" layoutY="270.0" mnemonicParsing="false" onAction="#addSongToPlaylistClick" text="Add song to playlist" />
+            <Label fx:id="songAddedLabel" layoutX="236.0" layoutY="295.0" text="Select songs to add to the playlist" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
