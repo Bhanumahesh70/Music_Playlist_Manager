@@ -89,7 +89,7 @@ public class ClientController {
 	    try {
 			AnchorPane root;
 			root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/Display_PlaylistsView.fxml"));
-			Main.stage.setTitle("All Songs");
+			Main.stage.setTitle("Playlists");
 			Scene scene = new Scene(root);
 			Main.stage.setScene(scene);
 		} catch (IOException e) {
@@ -97,4 +97,18 @@ public class ClientController {
 			e.printStackTrace();
 		}
 	}	
+	
+	@FXML
+	public void deletePlaylist_click() {
+		try {
+			AnchorPane root;
+			root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/Delete_PlaylistView.fxml"));
+			Main.stage.setTitle("Delete playlist");
+			Scene scene = new Scene(root);
+			Main.stage.setScene(scene);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

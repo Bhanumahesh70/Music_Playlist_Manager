@@ -91,6 +91,8 @@ public class PlaylistTable_DatabaseModel {
 				insertIntoPlaylistDatabase(playlistName,songId,userId);
 			}
 			
+			System.out.println("The song with songId '"+songId+"' is added to the playlist '"+playlistName+"'" );
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -99,6 +101,7 @@ public class PlaylistTable_DatabaseModel {
 	public static void createEmptyPlaylist(String playlistName, int user_id) {
 		int song_id =-1;
 		insertIntoPlaylistDatabase(playlistName,user_id,song_id);
+		System.out.println("New Paylist '"+playlistName+"' is created and added to database");
 	}
 	
 	public static boolean isPlaylistPresent(String playlistName, int user_id) {
@@ -176,6 +179,26 @@ public class PlaylistTable_DatabaseModel {
 			e.printStackTrace();
 		}
 		return isSongPresentinPlaylist;
+	}
+	
+	public static void deletePlaylist(String playlistName,int userId) {
+		
+		try {
+			String sql = "DELETE FROM beatmusic_playlist WHERE playlist_name = ? AND user_id = ?";
+			PreparedStatement stmt = DBConnect.getConnection().prepareStatement(sql);
+			stmt.setString(1, playlistName);
+			stmt.setInt(2, userId);
+			stmt.executeUpdate();
+			stmt.close();
+			
+			System.out.println("The Playlist '"+ playlistName+ "'is deleted from database");
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	
+		
 	}
 	
 	

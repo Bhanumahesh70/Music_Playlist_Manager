@@ -14,7 +14,7 @@
             <Button mnemonicParsing="false" onAction="#displaySongs" text="All Songs" />
             <Button mnemonicParsing="false" onAction="#displayPlaylist_panel" text="My Playlist" />
             <Button fx:id="createPlaylistBtn" mnemonicParsing="false" onAction="#createPlaylist_click" text="Create Playlist" />
-            <Button mnemonicParsing="false" text="Delete Playlist" />
+            <Button mnemonicParsing="false" onAction="#deletePlaylist_click" text="Delete Playlist" />
          </children>
       </VBox>
       <Pane fx:id="panel1" layoutX="213.0" layoutY="73.0" prefHeight="200.0" prefWidth="200.0">
