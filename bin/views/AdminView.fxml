@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
+   <children>
+      <Label layoutX="279.0" layoutY="31.0" text="Admin" />
+      <Pane fx:id="homePane" layoutX="73.0" layoutY="55.0" prefHeight="345.0" prefWidth="528.0">
+         <children>
+            <Button layoutX="184.0" layoutY="52.0" mnemonicParsing="false" onAction="#displaySongs" text="Manage Songs " />
+            <Button layoutX="188.0" layoutY="122.0" mnemonicParsing="false" onAction="#displayUsers" text="Manage Users" />
+         </children>
+      </Pane>
+      <Pane fx:id="songsPane" layoutX="125.0" layoutY="55.0" prefHeight="345.0" prefWidth="475.0" visible="false">
+         <children>
+            <TableView fx:id="songs_tableview" layoutX="50.0" layoutY="41.0" prefHeight="244.0" prefWidth="376.0">
+              <columns>
+                <TableColumn fx:id="title_column" prefWidth="142.6667022705078" text="Title" />
+                <TableColumn fx:id="album_column" prefWidth="84.0" text="Album" />
+                  <TableColumn fx:id="artist_column" prefWidth="80.66668701171875" text="Artist" />
+                  <TableColumn fx:id="duration_column" prefWidth="66.66665649414062" text="Duration" />
+              </columns>
+            </TableView>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backInSongs" text="Back" />
+         </children>
+      </Pane>
+      <Pane fx:id="usersPane" layoutX="125.0" layoutY="55.0" prefHeight="345.0" prefWidth="475.0" visible="false">
+         <children>
+            <TableView fx:id="usersTable" layoutX="76.0" layoutY="36.0" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="userNameColumn" prefWidth="121.33332824707031" text="User Name" />
+                <TableColumn fx:id="isAdminColumn" prefWidth="77.3333740234375" text="Is Admin" />
+              </columns>
+            </TableView>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backInUsers" text="Button" />
+         </children>
+      </Pane>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#displayHome" text="Home" />
+   </children>
+</AnchorPane>

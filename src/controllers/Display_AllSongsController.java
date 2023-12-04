@@ -40,19 +40,19 @@ public class Display_AllSongsController {
 	private Label songPlaying_Label;
 	
 	@FXML
-	private TableView<SongModel> songs_tableview;
+	private static TableView<SongModel> songs_tableview;
 
 	@FXML
-	private TableColumn<SongModel, String> title_column;
+	private static TableColumn<SongModel, String> title_column;
 
 	@FXML
-	private TableColumn<SongModel, String> artist_column;
+	private static TableColumn<SongModel, String> artist_column;
 
 	@FXML
-	private TableColumn<SongModel, String> album_column;
+	private static TableColumn<SongModel, String> album_column;
 
 	@FXML
-	private TableColumn<SongModel, Integer> duration_column;
+	private static TableColumn<SongModel, Integer> duration_column;
 	
 	// Declare DB objects
 		DBConnect conn = null;
@@ -92,7 +92,7 @@ public class Display_AllSongsController {
 	    }
 		
 	@FXML
-	public void initialize() {
+	public static void initialize() {
 		title_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
 		artist_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getArtist()));
 		album_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAlbum()));

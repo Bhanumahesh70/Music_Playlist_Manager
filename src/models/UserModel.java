@@ -7,13 +7,21 @@ public class UserModel {
     private boolean isAdmin;
 
     // Constructor
+   
     public UserModel(int userId, String username, String password, boolean isAdmin) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.isAdmin = isAdmin;
     }
-
+    
+    /*
+    public UserModel(int userId, String username, boolean isAdmin) {
+        this.userId = userId;
+        this.username = username;
+        this.isAdmin = isAdmin;
+    }
+*/
     // Getters and setters
 
     public int getUserId() {

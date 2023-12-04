@@ -121,6 +121,8 @@ public class Display_PlaylistsController extends ClientController {
 	private void submitButtonClicked() {
 		// Get the selected playlist from the ListView
 		PlaylistModel selectedPlaylist = playlist_listview.getSelectionModel().getSelectedItem();
+		// set the selected playlist variable with user selected playlist
+					setSelectedPlaylist(selectedPlaylist);
 
 		// Perform the action based on the selected playlist
 		if (selectedPlaylist != null) {
@@ -165,13 +167,10 @@ public class Display_PlaylistsController extends ClientController {
 		addSongsPane.setVisible(false);
 
 		if (playlist != null) {
-			
-			// set the selected playlist variable with user selected playlist
-			setSelectedPlaylist(playlist);
 			String playlistName = playlist.getPlaylistName();
 			//PlaylistSongs_tableview.getItems().clear();
 			myPlaylistLabel.setText(playlistName);
-			PlaylistSongs_tableview.getItems().clear();
+			//PlaylistSongs_tableview.getItems().clear();
 
 			if (!PlaylistTable_DatabaseModel.isPlaylistEmpty(playlistName, userId)) {
 
@@ -183,13 +182,47 @@ public class Display_PlaylistsController extends ClientController {
 	                }
 						
 			});
+				
+				/*
 				PlaylistArtist_column
 						.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getArtist()));
 				PlaylistAlbum_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAlbum()));
 				PlaylistDuration_column.setCellValueFactory(
 						cellData -> new SimpleIntegerProperty(cellData.getValue().getDuration()).asObject());
+				*/
+				PlaylistTitle_column.setCellValueFactory(cellData -> {
+			        if (cellData.getValue() != null && cellData.getValue().getTitle() != null) {
+			            return new SimpleStringProperty(cellData.getValue().getTitle());
+			        } else {
+			            return new SimpleStringProperty("");
+			        }
+			    });
 
-				List<SongModel> songsFromPlaylist = PlaylistTable_DatabaseModel.fetchSongsFromPlaylist(playlist);
+			    PlaylistArtist_column.setCellValueFactory(cellData -> {
+			        if (cellData.getValue() != null && cellData.getValue().getArtist() != null) {
+			            return new SimpleStringProperty(cellData.getValue().getArtist());
+			        } else {
+			            return new SimpleStringProperty("");
+			        }
+			    });
+
+			    PlaylistAlbum_column.setCellValueFactory(cellData -> {
+			        if (cellData.getValue() != null && cellData.getValue().getAlbum() != null) {
+			            return new SimpleStringProperty(cellData.getValue().getAlbum());
+			        } else {
+			            return new SimpleStringProperty("");
+			        }
+			    });
+
+			    PlaylistDuration_column.setCellValueFactory(cellData -> {
+			        if (cellData.getValue() != null) {
+			            return new SimpleIntegerProperty(cellData.getValue().getDuration()).asObject();
+			        } else {
+			            return new SimpleIntegerProperty(0).asObject(); // Assuming a default value for duration
+			        }
+			    });
+
+				List<SongModel> songsFromPlaylist = PlaylistTable_DatabaseModel.fetchSongsFromPlaylist(playlist,userId);
 				// Populate the TableView with data
 				PlaylistSongs_tableview.getItems().clear();
 				PlaylistSongs_tableview.getItems().addAll(songsFromPlaylist);
@@ -259,6 +292,9 @@ public class Display_PlaylistsController extends ClientController {
       
         		songAddedLabel.setText("The song '" + selectedSong.getTitle()+"'\nis added to the playlist");
             	PlaylistTable_DatabaseModel.addSongToPlaylist(playlistName,songId,userId);
+            	
+            	// Refresh the TableView with the updated data
+                //viewPlaylistDetails(playlist);
         	}
         	
         } else {

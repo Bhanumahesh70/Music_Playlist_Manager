@@ -48,6 +48,7 @@ public class PlaylistTable_DatabaseModel {
 		return playlists;
 	}
 
+	/*
 	public static List<SongModel> fetchSongsFromPlaylist(PlaylistModel playlist) {
 		List<SongModel> songsFromPlaylist = new ArrayList<SongModel>();
 		List<Integer> songIds = playlist.getSongIds();
@@ -57,6 +58,33 @@ public class PlaylistTable_DatabaseModel {
 
 		return songsFromPlaylist;
 	}
+	*/
+	
+	public static List<SongModel> fetchSongsFromPlaylist(PlaylistModel playlist, int userId) {
+		List<SongModel> songsFromPlaylist = new ArrayList<SongModel>();
+		try {
+
+			PreparedStatement stmt = DBConnect.getConnection()
+					.prepareStatement("SELECT * FROM beatmusic_playlist WHERE playlist_name =? AND user_id = ?");
+			
+			String playlistName = playlist.getPlaylistName();
+			stmt.setString(1, playlistName);
+			stmt.setInt(2, userId);
+
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				int songId = rs.getInt("song_id");
+				songsFromPlaylist.add(SongTable_DatabaseModel.fetchSongFromDatabase(songId));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return songsFromPlaylist;
+	}
+	
+	
+	
 	
 	
 	
@@ -88,7 +116,7 @@ public class PlaylistTable_DatabaseModel {
 				stmt.close();
 			}else {
 				
-				insertIntoPlaylistDatabase(playlistName,songId,userId);
+				insertIntoPlaylistDatabase(playlistName,userId,songId);
 			}
 			
 			System.out.println("The song with songId '"+songId+"' is added to the playlist '"+playlistName+"'" );
