@@ -88,7 +88,7 @@ public class Create_PlaylistController extends ClientController {
 			return;
 		}
 		if(PlaylistTable_DatabaseModel.isPlaylistPresent(playlistName, userId)){
-			String s = "The playlist title is already present\nEnter a new name a create a new playlist";
+			String s = "The playlist title is already present\nEnter a new playlist name";
 			playlistTitleError_label.setText(s);
 		}
 		else {
@@ -134,11 +134,11 @@ public class Create_PlaylistController extends ClientController {
         	
         	if(PlaylistTable_DatabaseModel.isSongPresentinPlaylist(playlistName,userId,songId)) {
         		
-        		addSongLabel.setText("The song '" + selectedSong.getTitle()+"'\nis already in the playlist");
+        		addSongLabel.setText("The song '" + selectedSong.getTitle()+"'is already in the playlist");
         		
         	}else {
       
-        		addSongLabel.setText("The song '" + selectedSong.getTitle()+"'\nis added to the playlist");
+        		addSongLabel.setText("The song '" + selectedSong.getTitle()+"'is added to the playlist");
             	PlaylistTable_DatabaseModel.addSongToPlaylist(playlistName,songId,userId);
         	}
         	

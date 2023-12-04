@@ -58,6 +58,50 @@ public class UserTable_DatabaseModel {
 		}
 	}
 
+	public static boolean isUserNameexists(UserModel user) {
+		boolean isUserNameexists = false;
+		try {
+
+			String sql = "SELECT * FROM beatmusic_users WHERE username = ?";
+
+			PreparedStatement stmt = DBConnect.getConnection().prepareStatement(sql);
+			stmt.setString(1, user.getUsername());
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				isUserNameexists = true;
+			}
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return isUserNameexists;
+	}
+	
+	/*
+	public static boolean isEmailexists(UserModel user) {
+		boolean isUserNameexists = false;
+		try {
+
+			String sql = "SELECT * FROM beatmusic_users WHERE username = ?";
+
+			PreparedStatement stmt = DBConnect.getConnection().prepareStatement(sql);
+			stmt.setString(1, user.getUsername());
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				isUserNameexists = true;
+			}
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return isUserNameexists;
+	}
+	*/
+	
 	public static void deleteUserFromDatabase(UserModel user) {
 		try {
 

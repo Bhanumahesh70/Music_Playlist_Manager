@@ -4,22 +4,35 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
    <children>
-      <Label layoutX="279.0" layoutY="31.0" text="Admin" />
+      <Label layoutX="262.0" layoutY="20.0" text="Admin" textFill="#102298">
+         <font>
+            <Font size="26.0" />
+         </font></Label>
       <Pane fx:id="homePane" layoutX="73.0" layoutY="55.0" prefHeight="345.0" prefWidth="528.0">
          <children>
-            <Button layoutX="184.0" layoutY="52.0" mnemonicParsing="false" onAction="#displaySongs" text="Manage Songs " />
-            <Button layoutX="188.0" layoutY="122.0" mnemonicParsing="false" onAction="#displayUsers" text="Manage Users" />
+            <VBox layoutX="175.0" layoutY="78.0" prefHeight="95.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#displaySongs" text="Manage Songs " />
+                  <Button mnemonicParsing="false" onAction="#displayUsers" prefHeight="25.0" prefWidth="98.0" text="Manage Users" />
+               </children>
+            </VBox>
          </children>
       </Pane>
-      <Pane fx:id="songsPane" layoutX="125.0" layoutY="55.0" prefHeight="345.0" prefWidth="475.0" visible="false">
+      <Pane fx:id="songsPane" layoutY="55.0" prefHeight="345.0" prefWidth="600.0" visible="false">
          <children>
-            <TableView fx:id="songs_tableview" layoutX="50.0" layoutY="41.0" prefHeight="244.0" prefWidth="376.0">
+            <TableView fx:id="songs_tableview" layoutX="171.0" layoutY="24.0" prefHeight="244.0" prefWidth="376.0">
               <columns>
                 <TableColumn fx:id="title_column" prefWidth="142.6667022705078" text="Title" />
                 <TableColumn fx:id="album_column" prefWidth="84.0" text="Album" />
@@ -27,20 +40,73 @@
                   <TableColumn fx:id="duration_column" prefWidth="66.66665649414062" text="Duration" />
               </columns>
             </TableView>
-            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backInSongs" text="Back" />
+            <VBox layoutX="50.0" layoutY="48.0" prefHeight="54.0" prefWidth="76.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#backInSongs" prefHeight="25.0" prefWidth="73.0" text="Back" />
+                  <Button mnemonicParsing="false" onAction="#addSongs_click" text="Add songs" />
+               </children>
+            </VBox>
+            <Button layoutX="306.0" layoutY="279.0" mnemonicParsing="false" onAction="#playSong" prefHeight="25.0" prefWidth="60.0" text="Play" />
+            <Label fx:id="playSongLabel" layoutX="270.0" layoutY="314.0" prefHeight="17.0" prefWidth="266.0" textFill="#9f1313" />
          </children>
       </Pane>
-      <Pane fx:id="usersPane" layoutX="125.0" layoutY="55.0" prefHeight="345.0" prefWidth="475.0" visible="false">
+      <Pane fx:id="usersPane" layoutY="55.0" prefHeight="345.0" prefWidth="600.0" visible="false">
          <children>
-            <TableView fx:id="usersTable" layoutX="76.0" layoutY="36.0" prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="usersTable" layoutX="200.0" layoutY="29.0" prefHeight="200.0" prefWidth="200.0">
               <columns>
                 <TableColumn fx:id="userNameColumn" prefWidth="121.33332824707031" text="User Name" />
                 <TableColumn fx:id="isAdminColumn" prefWidth="77.3333740234375" text="Is Admin" />
               </columns>
             </TableView>
-            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backInUsers" text="Button" />
+            <VBox layoutX="229.0" layoutY="243.0" prefHeight="61.0" prefWidth="143.0" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#deleteUser" prefHeight="25.0" prefWidth="144.0" text="Delete User" />
+                  <Button mnemonicParsing="false" onAction="#changeAdminStatus" prefHeight="25.0" prefWidth="143.0" text="Change Admin Status" />
+               </children>
+            </VBox>
+            <Label fx:id="userModifyLabel" layoutX="212.0" layoutY="304.0" prefHeight="25.0" prefWidth="304.0" textFill="#ae1414" />
+            <Button layoutX="110.0" layoutY="29.0" mnemonicParsing="false" onAction="#backInUsers" text="Back" />
          </children>
       </Pane>
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#displayHome" text="Home" />
+      <Pane fx:id="addSongsPane" layoutY="55.0" prefHeight="345.0" prefWidth="600.0" visible="false">
+         <children>
+            <GridPane layoutX="199.0" layoutY="98.0" prefHeight="108.0" prefWidth="219.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.6666259765625" minWidth="10.0" prefWidth="68.66664632161458" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.66670735677087" minWidth="10.0" prefWidth="150.00002034505212" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="songTitleText" prefHeight="25.0" prefWidth="149.0" promptText="Enter title" GridPane.columnIndex="1" />
+                  <Label text="Song Title" />
+                  <TextField fx:id="albumText" promptText="Enter Album" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="artistText" promptText="Enter Artist" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="durationText" prefHeight="25.0" prefWidth="151.0" promptText="Enter duration in seconds" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Album" GridPane.rowIndex="1" />
+                  <Label text="Artist" GridPane.rowIndex="2" />
+                  <Label text="Duration" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+            <Label layoutX="251.0" layoutY="45.0" text="Enter Song details" />
+            <Label fx:id="songAddedLabel" layoutX="210.0" layoutY="261.0" prefHeight="61.0" prefWidth="376.0" text="Song is added" textFill="#9f1f1f" />
+            <VBox layoutX="38.0" layoutY="52.0" prefHeight="51.0" prefWidth="60.0" spacing="15.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#backToSongs" prefHeight="25.0" prefWidth="55.0" text="Back" />
+               </children>
+            </VBox>
+            <HBox layoutX="255.0" layoutY="226.0" prefHeight="51.0" prefWidth="143.0" spacing="30.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#addSong" text="Submit" />
+                  <Button mnemonicParsing="false" onAction="#refreshEnterSongInputDetails" text="Refresh" />
+               </children>
+            </HBox>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
