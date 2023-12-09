@@ -111,4 +111,18 @@ public class ClientController {
 			e.printStackTrace();
 		}
 	}
+	
+	@FXML
+	public void signOut() {
+		try {
+			AnchorPane root;
+			root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
+			Main.stage.setTitle("All Songs");
+			Scene scene = new Scene(root);
+			Main.stage.setScene(scene);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

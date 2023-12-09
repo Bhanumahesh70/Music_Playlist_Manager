@@ -11,41 +11,42 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Display_PlaylistsController">
    <children>
-      <Pane fx:id="playlists_panel" layoutX="146.0" layoutY="74.0" prefHeight="312.0" prefWidth="411.0">
+      <Pane id="displayPlaylistPanel" fx:id="playlists_panel" layoutX="146.0" layoutY="54.0" prefHeight="332.0" prefWidth="411.0" stylesheets="@../application/application.css">
          <children>
-            <ListView fx:id="playlist_listview" layoutX="120.0" layoutY="14.0" prefHeight="238.0" prefWidth="109.0" />
-            <Label layoutX="75.0" layoutY="290.0" prefHeight="17.0" prefWidth="244.0" text="Click on the playlists to display songs" textFill="#ed1717" />
-            <Button layoutX="147.0" layoutY="259.0" mnemonicParsing="false" onAction="#submitButtonClicked" text="Submit" />
+            <ListView id="playlistListView" fx:id="playlist_listview" layoutX="120.0" layoutY="14.0" prefHeight="207.0" prefWidth="119.0" stylesheets="@../application/application.css" />
+            <Label id="displayPlaylistSelectPlaylistLabel" layoutX="73.0" layoutY="290.0" prefHeight="17.0" prefWidth="338.0" styleClass="selectPlaylistLabel" stylesheets="@../application/application.css" text="Click on the playlists to display songs" textFill="#ed1717" />
+            <Button id="displayPlaylistSubmitButton" layoutX="139.0" layoutY="235.0" mnemonicParsing="false" onAction="#submitButtonClicked" styleClass="submitButton" stylesheets="@../application/application.css" text="Submit" />
          </children>
       </Pane>
-      <Pane layoutX="192.0" layoutY="19.0" prefHeight="55.0" prefWidth="256.0">
+      <Pane layoutX="192.0" layoutY="19.0" prefHeight="35.0" prefWidth="256.0">
          <children>
-            <Label fx:id="myPlaylistLabel" layoutX="61.0" layoutY="28.0" text="My Playlists" textFill="#1a37f6">
+            <Label id="myPlaylistTitle" fx:id="myPlaylistLabel" layoutX="68.0" layoutY="8.0" stylesheets="@../application/application.css" text="My Playlists" textFill="#14a89e">
                <font>
-                  <Font name="Bell MT" size="23.0" />
+                  <Font name="Arial Bold Italic" size="23.0" />
                </font></Label>
          </children>
       </Pane>
-      <Pane fx:id="displaySongs_Panel" layoutX="9.0" layoutY="74.0" prefHeight="319.0" prefWidth="600.0" visible="false">
+      <Pane id="displayPlaylistSongsPanel" fx:id="displaySongs_Panel" layoutX="4.0" layoutY="73.0" prefHeight="319.0" prefWidth="592.0" stylesheets="@../application/application.css" visible="false">
          <children>
-            <TableView fx:id="PlaylistSongs_tableview" layoutX="141.0" layoutY="14.0" prefHeight="253.0" prefWidth="387.0">
+            <TableView id="displayPlaylistSongsTable" fx:id="PlaylistSongs_tableview" layoutX="141.0" layoutY="14.0" prefHeight="216.0" prefWidth="387.0" styleClass="SongstableView" stylesheets="@../application/application.css">
               <columns>
                 <TableColumn fx:id="PlaylistTitle_column" prefWidth="132.66665649414062" text="Title" />
                 <TableColumn fx:id="PlaylistAlbum_column" prefWidth="85.33331298828125" text="Album" />
                   <TableColumn fx:id="PlaylistArtist_column" text="Artist" />
-                  <TableColumn fx:id="PlaylistDuration_column" prefWidth="62.66668701171875" text="Duration" />
+                  <TableColumn fx:id="PlaylistDuration_column" prefWidth="87.333251953125" text="Duration" />
               </columns>
             </TableView>
-            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="74.0" text="Back" />
-            <Label fx:id="emptyPlaylistLabel" layoutX="282.0" layoutY="288.0" text="The Playlist is empty" />
-            <Button layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#addSongsClicked" text="Add Songs" />
+            <Label id="playlistIsEmptyLabel" fx:id="emptyPlaylistLabel" layoutX="236.0" layoutY="288.0" prefHeight="16.0" prefWidth="329.0" stylesheets="@../application/application.css" text="The Playlist is empty" />
+            <Button id="displayPlayListAddSongsButton" layoutX="25.0" layoutY="85.0" mnemonicParsing="false" onAction="#addSongsClicked" prefHeight="31.0" prefWidth="103.0" styleClass="addSongsButton" stylesheets="@../application/application.css" text="Add Songs" />
+            <Button layoutX="291.0" layoutY="240.0" mnemonicParsing="false" onAction="#playButtonClicked" prefHeight="32.0" prefWidth="48.0" styleClass="playButton" stylesheets="@../application/application.css" text="Play" />
+            <Button id="displayPlaylistBackButton" layoutX="37.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" prefHeight="27.0" prefWidth="73.0" styleClass="backButton" stylesheets="@../application/application.css" text="Back" />
          </children>
       </Pane>
-      <Button fx:id="backButton" layoutX="9.0" layoutY="23.0" mnemonicParsing="false" onAction="#displayHome" text="Home" />
-      <Pane fx:id="addSongsPane" layoutX="-7.0" layoutY="67.0" prefHeight="332.0" prefWidth="600.0" visible="false">
+      <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#displayHome" prefHeight="27.0" prefWidth="73.0" styleClass="homeButton" stylesheets="@../application/application.css" text="Home" />
+      <Pane fx:id="addSongsPane" layoutX="-4.0" layoutY="67.0" prefHeight="332.0" prefWidth="600.0" styleClass="displayPlaylistAllSongsPane" stylesheets="@../application/application.css" visible="false">
          <children>
-            <Button layoutX="23.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToplaylist" prefHeight="25.0" prefWidth="74.0" text="Back" />
-            <TableView fx:id="songs_tableview" layoutX="160.0" layoutY="6.0" prefHeight="253.0" prefWidth="369.0">
+            <Button id="displayPlaylistAllSongsBackButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToplaylist" prefHeight="35.0" prefWidth="73.0" styleClass="backButton" stylesheets="@../application/application.css" text="Back" />
+            <TableView id="displayPlaylistAllSongsTable" fx:id="songs_tableview" layoutX="162.0" layoutY="33.0" prefHeight="225.0" prefWidth="369.0" styleClass="tableView" stylesheets="@../application/application.css">
               <columns>
                 <TableColumn fx:id="title_column" prefWidth="121.33332824707031" text="Title" />
                 <TableColumn fx:id="album_column" prefWidth="84.66668701171875" text="Album" />
@@ -53,8 +54,13 @@
                   <TableColumn fx:id="duration_column" minWidth="6.0" prefWidth="67.99996948242188" text="Duration" />
               </columns>
             </TableView>
-            <Button layoutX="267.0" layoutY="270.0" mnemonicParsing="false" onAction="#addSongToPlaylistClick" text="Add song to playlist" />
-            <Label fx:id="songAddedLabel" layoutX="236.0" layoutY="295.0" text="Select songs to add to the playlist" />
+            <Button id="AddSongToPlaylistButton" layoutX="254.0" layoutY="270.0" mnemonicParsing="false" onAction="#addSongToPlaylistClick" prefHeight="28.0" prefWidth="184.0" styleClass="addSongsButton" stylesheets="@../application/application.css" text="Add song to playlist" />
+            <Label id="selectSongToAddToPlaylistLabel" fx:id="songAddedLabel" layoutX="221.0" layoutY="301.0" prefHeight="17.0" prefWidth="350.0" styleClass="selectSongLabel" stylesheets="@../application/application.css" text="Select songs to add to the playlist" />
+            <Label layoutX="254.0" layoutY="14.0" text="Displaying All Songs" textFill="#3a9f29">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

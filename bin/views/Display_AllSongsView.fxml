@@ -6,24 +6,31 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Display_AllSongsController">
    <children>
-      <Pane fx:id="allsongs_panel" layoutX="108.0" prefHeight="400.0" prefWidth="437.0">
+      <Pane id="displayAllSongsPane" fx:id="allsongs_panel" layoutX="108.0" prefHeight="400.0" prefWidth="437.0" stylesheets="@../application/application.css">
          <children>
-            <TableView fx:id="songs_tableview" layoutX="14.0" layoutY="45.0" prefHeight="291.0" prefWidth="421.0">
+            <TableView id="AllSongsTableView" fx:id="songs_tableview" layoutX="14.0" layoutY="45.0" prefHeight="255.0" prefWidth="421.0" styleClass="SongstableView" stylesheets="@../application/application.css">
               <columns>
                 <TableColumn fx:id="title_column" prefWidth="139.99996948242188" text="Title" />
-                <TableColumn fx:id="album_column" prefWidth="68.0" text="Album" />
-                  <TableColumn fx:id="artist_column" prefWidth="108.66668701171875" text="Artist" />
-                  <TableColumn fx:id="duration_column" prefWidth="80.6666259765625" text="Duration" />
+                <TableColumn fx:id="album_column" text="Album" />
+                  <TableColumn fx:id="artist_column" prefWidth="97.3333740234375" text="Artist" />
+                  <TableColumn fx:id="duration_column" prefWidth="102.33331298828125" text="Duration" />
               </columns>
             </TableView>
-            <Label fx:id="label" layoutX="167.0" layoutY="20.0" text="All Songs" />
-            <Button layoutX="173.0" layoutY="343.0" mnemonicParsing="false" onAction="#playButtonClicked" text="Play" />
-            <Label fx:id="songPlaying_Label" layoutX="124.0" layoutY="378.0" prefHeight="17.0" prefWidth="313.0" text="Select a song to play" />
+            <Label id="allSongsTitleLabel" fx:id="label" layoutX="170.0" layoutY="14.0" stylesheets="@../application/application.css" text="All Songs" textFill="#3b9d0b">
+               <font>
+                  <Font name="Arial Bold Italic" size="21.0" />
+               </font></Label>
+            <Button id="allSongsPlayButton" layoutX="173.0" layoutY="308.0" mnemonicParsing="false" onAction="#playButtonClicked" prefHeight="32.0" prefWidth="56.0" styleClass="playButton" stylesheets="@../application/application.css" text="Play" />
+            <Label id="selectSongToPlayLabel" fx:id="songPlaying_Label" layoutX="133.0" layoutY="352.0" prefHeight="41.0" prefWidth="295.0" stylesheets="@../application/application.css" text="Select a song to play">
+               <font>
+                  <Font size="1.0" />
+               </font></Label>
          </children>
       </Pane>
-      <Button fx:id="backButton" layoutX="14.0" layoutY="25.0" mnemonicParsing="false" onAction="#displayHome" text="Home" />
+      <Button fx:id="backButton" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#displayHome" prefHeight="25.0" prefWidth="64.0" styleClass="homeButton" stylesheets="@../application/application.css" text="Home" />
    </children>
 </AnchorPane>

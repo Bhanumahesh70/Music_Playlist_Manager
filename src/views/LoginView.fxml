@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
@@ -17,37 +16,43 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
-      <ImageView fitHeight="91.0" fitWidth="200.0" layoutX="277.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../Downloads/icons8-drum-set-50.png" />
-         </image>
-      </ImageView>
-      <Pane fx:id="loginPane" layoutX="-1.0" layoutY="112.0" prefHeight="292.0" prefWidth="530.0">
+      <Pane id="loginPagePane" fx:id="loginPane" layoutY="103.0" prefHeight="292.0" prefWidth="614.0" stylesheets="@../application/application.css">
          <children>
-            <VBox layoutX="257.0" layoutY="14.0" prefHeight="47.0" prefWidth="158.0" spacing="20.0">
+            <Button id="loginButton" layoutX="221.0" layoutY="128.0" mnemonicParsing="false" onAction="#login" prefHeight="31.0" prefWidth="85.0" stylesheets="@../application/application.css" text="Login" />
+            <GridPane id="credentialsGridPane" layoutX="176.0" layoutY="26.0" prefHeight="91.0" prefWidth="293.0" stylesheets="@../application/application.css">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="105.3333740234375" minWidth="10.0" prefWidth="105.3333740234375" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="153.33331298828125" minWidth="10.0" prefWidth="94.6666259765625" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="65.33334350585938" minHeight="10.0" prefHeight="46.666656494140625" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="74.00001017252603" minHeight="10.0" prefHeight="74.00001017252603" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="25.333343505859375" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <TextField fx:id="username_text" promptText="Enter user name" />
-                  <PasswordField fx:id="password_text" promptText="Enter Password" />
+                  <Label id="credentialsTextLabelUserName" styleClass="textFieldLabel" stylesheets="@../application/application.css" text="User Name" />
+                  <Label id="credentialsTextLabelPassword" prefHeight="44.0" prefWidth="98.0" styleClass="textFieldLabel" stylesheets="@../application/application.css" text="Password" GridPane.rowIndex="1" />
+                  <TextField id="credentialsTextFeildUserName" fx:id="username_text" prefHeight="29.0" prefWidth="153.0" promptText="Enter user name" styleClass="textFeild" stylesheets="@../application/application.css" GridPane.columnIndex="1" />
+                  <PasswordField id="credentialsTextFeildPassword" fx:id="password_text" promptText="Enter Password" styleClass="textFeild" stylesheets="@../application/application.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
-            </VBox>
-            <VBox layoutX="161.0" layoutY="17.0" prefHeight="65.0" prefWidth="69.0" spacing="30.0">
-               <children>
-                  <Label text="User Name" />
-                  <Label text="Password" />
-               </children>
-            </VBox>
-            <Button layoutX="289.0" layoutY="121.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="59.0" text="Login" />
-            <HBox layoutX="215.0" layoutY="194.0" prefHeight="25.0" prefWidth="200.0">
-               <children>
-                  <Label fx:id="loginPrompt" prefHeight="17.0" prefWidth="77.0" text="New User?" textFill="#d21919" />
-                  <Button mnemonicParsing="false" onAction="#signUp" prefHeight="15.0" prefWidth="58.0" text="Sign Up" />
-               </children>
-            </HBox>
+            </GridPane>
+            <Label id="newUserLabel" fx:id="loginPrompt" layoutX="168.0" layoutY="176.0" prefHeight="42.0" prefWidth="344.0" stylesheets="@../application/application.css" textFill="#cc111d">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+            <Button id="signupButton" layoutX="249.0" layoutY="239.0" mnemonicParsing="false" onAction="#signUp" prefHeight="37.0" prefWidth="91.0" stylesheets="@../application/application.css" text="Sign Up" />
+            <Label layoutX="150.0" layoutY="250.0" text="New User?" textFill="#be1616">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <Pane fx:id="signUpPane" layoutY="108.0" prefHeight="292.0" prefWidth="530.0" visible="false">
+      <Pane id="signUpPane" fx:id="signUpPane" layoutY="108.0" prefHeight="292.0" prefWidth="565.0" stylesheets="@../application/application.css" visible="false">
          <children>
-            <GridPane layoutX="167.0" layoutY="70.0" prefHeight="120.0" prefWidth="267.0">
+            <GridPane id="signUpGrid" layoutX="167.0" layoutY="70.0" prefHeight="120.0" prefWidth="267.0" stylesheets="@../application/application.css" vgap="20.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.33334859212238" minWidth="10.0" prefWidth="167.33334859212238" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="248.0000152587891" minWidth="10.0" prefWidth="163.66665140787762" />
@@ -59,28 +64,37 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="userNameText" prefHeight="25.0" prefWidth="123.0" GridPane.columnIndex="1" />
-                  <PasswordField fx:id="passwordText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <PasswordField fx:id="confirmPasswordText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="emailText" prefHeight="25.0" prefWidth="181.0" promptText="Enter a valid email" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="User Name" />
-                  <Label text="Email" GridPane.rowIndex="1" />
-                  <Label text="Password" GridPane.rowIndex="2" />
-                  <Label text="Confirm Password" GridPane.rowIndex="3" />
+                  <TextField fx:id="userNameText" prefHeight="25.0" prefWidth="123.0" styleClass="signupTextfeilds" stylesheets="@../application/application.css" GridPane.columnIndex="1" />
+                  <PasswordField fx:id="passwordText" styleClass="signupTextfeilds" stylesheets="@../application/application.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <PasswordField fx:id="confirmPasswordText" styleClass="signupTextfeilds" stylesheets="@../application/application.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="emailText" prefHeight="25.0" prefWidth="181.0" promptText="Enter a valid email" styleClass="signupTextfeilds" stylesheets="@../application/application.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label styleClass="signupTextfeildLabels" stylesheets="@../application/application.css" text="User Name" />
+                  <Label styleClass="signupTextfeildLabels" stylesheets="@../application/application.css" text="Email" GridPane.rowIndex="1" />
+                  <Label styleClass="signupTextfeildLabels" stylesheets="@../application/application.css" text="Password" GridPane.rowIndex="2" />
+                  <Label styleClass="signupTextfeildLabels" stylesheets="@../application/application.css" text="Confirm Password" GridPane.rowIndex="3" />
                </children>
             </GridPane>
-            <Button layoutX="249.0" layoutY="217.0" mnemonicParsing="false" onAction="#signUpNewUser" text="Submit" />
-            <Label fx:id="signupErrorLabel" layoutX="177.0" layoutY="253.0" prefHeight="17.0" prefWidth="351.0" text="Label" textFill="#ba1717" />
-            <Label layoutX="221.0" layoutY="22.0" text="Enter details">
+            <Button id="signupSubmit" layoutX="249.0" layoutY="217.0" mnemonicParsing="false" onAction="#signUpNewUser" styleClass="submitButton" stylesheets="@../application/application.css" text="Submit" />
+            <Label id="signupErrorLabel" fx:id="signupErrorLabel" layoutX="209.0" layoutY="261.0" prefHeight="17.0" prefWidth="342.0" stylesheets="@../application/application.css" textFill="#ba1717" />
+            <Label id="signupEnterDetailsTitle" layoutX="221.0" layoutY="22.0" stylesheets="@../application/application.css" text="Enter details">
                <font>
                   <Font size="20.0" />
                </font></Label>
-            <VBox layoutX="44.0" layoutY="95.0" prefHeight="71.0" prefWidth="58.0" spacing="10.0">
+            <VBox layoutX="44.0" layoutY="95.0" prefHeight="91.0" prefWidth="85.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#backToLogin" prefHeight="25.0" prefWidth="55.0" text="Back" />
-                  <Button mnemonicParsing="false" onAction="#refresh" text="Refresh" />
+                  <Button id="signupBackButton" mnemonicParsing="false" onAction="#backToLogin" prefHeight="30.0" prefWidth="73.0" styleClass="backButton" stylesheets="@../application/application.css" text="Back" />
+                  <Button id="signupRefresh" mnemonicParsing="false" onAction="#refresh" stylesheets="@../application/application.css" text="Refresh" />
                </children>
             </VBox>
+         </children>
+      </Pane>
+      <Pane prefHeight="103.0" prefWidth="565.0">
+         <children>
+            <ImageView fitHeight="91.0" fitWidth="200.0" layoutX="237.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../Downloads/icons8-drum-set-50.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

@@ -97,6 +97,7 @@ public class Create_PlaylistController extends ClientController {
 		AddSongsToPlaylist_pane.setVisible(true);
 		String s = "Playlist '"+playlistName+"' is created";
 		playListCreated_label.setText(s);
+		addSongLabel.setText("");
 		}	
 	}
 	

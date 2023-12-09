@@ -1,16 +1,21 @@
 package controllers;
 
+import java.io.IOException;
 import java.util.List;
 
+import application.Main;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import models.PlaylistModel;
 import models.PlaylistTable_DatabaseModel;
@@ -105,6 +110,7 @@ public class AdminController {
 		// Populate the TableView with data
 		songs_tableview.getItems().addAll(songs);
 		System.out.println("Displaying all songs");
+		playSongLabel.setText("");
 	}
 
 	@FXML
@@ -145,6 +151,7 @@ public class AdminController {
 	@FXML
 	public void backInUsers() {
 		displayHome();
+		userModifyLabel.setText("");
 	}
 
 	@FXML
@@ -173,6 +180,7 @@ public class AdminController {
 		albumText.clear();
 		artistText.clear();
 		durationText.clear();
+		songAddedLabel.setText("");
 	}
 
 	@FXML
@@ -345,5 +353,18 @@ public class AdminController {
         } else {
         	playSongLabel.setText("No song is selected");
         }
+	}
+	@FXML
+	public void signOut() {
+		try {
+			AnchorPane root;
+			root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
+			Main.stage.setTitle("All Songs");
+			Scene scene = new Scene(root);
+			Main.stage.setScene(scene);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

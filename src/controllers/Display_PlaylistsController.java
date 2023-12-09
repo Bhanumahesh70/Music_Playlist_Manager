@@ -140,11 +140,13 @@ public class Display_PlaylistsController extends ClientController {
 		playlists_panel.setVisible(true);
 		addSongsPane.setVisible(false);
 		myPlaylistLabel.setText("My Playlists");
+		PlaylistSongs_tableview.getItems().clear();
 	}
 	@FXML
 	public void backToplaylist() {
 		PlaylistModel playlist = getSelectedPlaylist();
 		viewPlaylistDetails(playlist);
+		
 		
 	}
 	@FXML
@@ -231,7 +233,7 @@ public class Display_PlaylistsController extends ClientController {
 				
 			}
 			else {
-				emptyPlaylistLabel.setText("The playlist is empty from disp ply");
+				emptyPlaylistLabel.setText("The playlist is empty");
 			}
 		} else {
 			playlist_detailsLabel.setText("Please select a playlist to view details.");
@@ -267,6 +269,7 @@ public class Display_PlaylistsController extends ClientController {
 
 		// Populate the TableView with data
 		songs_tableview.getItems().addAll(songs);
+		songAddedLabel.setText("Select songs to add to the playlist");
 		System.out.println("Displaying all songs to add to playlist");
 		
 	}
@@ -286,11 +289,11 @@ public class Display_PlaylistsController extends ClientController {
         	
         	if(PlaylistTable_DatabaseModel.isSongPresentinPlaylist(playlistName,userId,songId)) {
         		
-        		songAddedLabel.setText("The song '" + selectedSong.getTitle()+"'\nis already in the playlist");
+        		songAddedLabel.setText("The song '" + selectedSong.getTitle()+"' is already in the playlist");
         		
         	}else {
       
-        		songAddedLabel.setText("The song '" + selectedSong.getTitle()+"'\nis added to the playlist");
+        		songAddedLabel.setText("The song '" + selectedSong.getTitle()+"' is added to the playlist");
             	PlaylistTable_DatabaseModel.addSongToPlaylist(playlistName,songId,userId);
             	
             	// Refresh the TableView with the updated data
@@ -299,6 +302,19 @@ public class Display_PlaylistsController extends ClientController {
         	
         } else {
         	songAddedLabel.setText("No song is selected");
+        }
+    }
+	
+	@FXML
+    public void playButtonClicked(ActionEvent event) {
+        // Get the selected song from the TableView
+        SongModel selectedSong = PlaylistSongs_tableview.getSelectionModel().getSelectedItem();
+
+        // Update the label with the selected song information
+        if (selectedSong != null) {
+        	emptyPlaylistLabel.setText("Now Playing: " + selectedSong.getTitle());
+        } else {
+        	emptyPlaylistLabel.setText("No song is selected");
         }
     }
 }

@@ -6,16 +6,15 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Delete_PlaylistController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Delete_PlaylistController">
    <children>
-      <TableView fx:id="playlists_tableview" layoutX="208.0" layoutY="61.0" prefHeight="200.0" prefWidth="200.0">
+      <TableView id="deletePlaylistTable" fx:id="playlists_tableview" layoutX="200.0" layoutY="82.0" prefHeight="217.0" prefWidth="200.0" styleClass="playlistTable" stylesheets="@../application/application.css">
         <columns>
           <TableColumn fx:id="title_column" prefWidth="198.66668701171875" text="Playlists" />
         </columns>
       </TableView>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#displayHome" text="Home" />
-      <Button fx:id="delete" layoutX="282.0" layoutY="279.0" mnemonicParsing="false" onAction="#deleteButtonClicked" text="Delete" />
-      <Label fx:id="playlistDelete_label" layoutX="242.0" layoutY="323.0" text="Select a playlist to delete" />
+      <Button layoutX="14.0" layoutY="22.0" mnemonicParsing="false" onAction="#displayHome" prefHeight="29.0" prefWidth="71.0" styleClass="homeButton" stylesheets="@../application/application.css" text="Home" />
+      <Button id="deletePlaylistButton" fx:id="delete" layoutX="250.0" layoutY="310.0" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="25.0" prefWidth="99.0" styleClass="deleteButton" stylesheets="@../application/application.css" text="Delete" />
+      <Label id="playlistDeletedLabel" fx:id="playlistDelete_label" layoutX="217.0" layoutY="359.0" prefHeight="16.0" prefWidth="305.0" stylesheets="@../application/application.css" text="Select a playlist to delete" />
    </children>
 </AnchorPane>

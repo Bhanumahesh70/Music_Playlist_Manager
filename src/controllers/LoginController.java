@@ -122,6 +122,7 @@ public class LoginController {
 		emailText.clear();
 		passwordText.clear();
 		confirmPasswordText.clear();
+		signupErrorLabel.setText("");
 	}
 	
 	@FXML

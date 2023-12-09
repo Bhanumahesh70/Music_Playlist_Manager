@@ -1,1 +1,408 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.1) , 4, 0.0 , 0 , 2 );
+}
+
+.button:hover {
+    -fx-background-color: #2980b9;
+}
+
+.button:pressed {
+    -fx-background-color: #1f6697;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.2) , 4, 0.0 , 0 , 2 );
+}
+
+#loginButton {
+    -fx-background-color: #3498db;
+}
+
+#loginButton:hover {
+    -fx-background-color: #2980b9;
+}
+
+#loginButton:pressed {
+    -fx-background-color: #1f6697;
+}
+
+#signupButton {
+    -fx-background-color: #2ecc71;
+}
+
+#signupButton:hover {
+    -fx-background-color: #27ae60;
+}
+
+#signupButton:pressed {
+    -fx-background-color: #219d53;
+}
+
+.textFeild {
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-background-color: #fff;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.1) , 4, 0.0 , 0 , 2 );
+}
+
+
+.textFieldLabel {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+    -fx-padding: 0 0 5px 0;
+}
+
+/* Hover effect for text fields */
+.textFeild:hover {
+    -fx-border-color: #3498db;
+}
+
+/* Focus effect for text fields */
+.textFeild:focused {
+    -fx-border-color: #3498db;
+    -fx-effect: dropshadow( three-pass-box , rgba(52,152,219,0.6) , 8, 0.0 , 0 , 2 );
+}
+
+/* Grid Container Styles */
+/* 
+
+
+/* Common Styles for Labels */
+.signupTextfeildLabels,.enterSongDetailsTextLabel {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+    -fx-padding: 5px 0;
+}
+
+/* Common Styles for Text Fields */
+.signupTextfeilds, .enterSongDetailsTextFeild {
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-background-color: #fff;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.1) , 4, 0.0 , 0 , 2 );
+}
+
+/* Hover effect for text fields */
+.signupTextfeilds:hover,.enterSongDetailsTextFeild:hover {
+    -fx-border-color: #3498db;
+}
+
+/* Focus effect for text fields */
+.signupTextfeilds:focused,.enterSongDetailsTextFeild:focused {
+    -fx-border-color: #3498db;
+    -fx-effect: dropshadow( three-pass-box , rgba(52,152,219,0.6) , 8, 0.0 , 0 , 2 );
+}
+
+.newUserLabel {
+    -fx-font-size: 14px;
+    -fx-text-fill: #ff0000; /* Red color */
+    -fx-padding: 5px 0;
+    -fx-font-weight: bold;
+}
+
+/*Css for Client View */
+/* */
+/* */
+.clientViewButtons {
+    -fx-font-size: 16px;
+    -fx-padding: 10 20;
+}
+
+#allSongsButton {
+
+     -fx-background-color: linear-gradient(to right, #3498db, #2980b9);
+
+}
+
+#createPlaylistButton {
+    -fx-background-color: linear-gradient(to right, #27ae60, #2ecc71);
+    
+}
+
+#PlaylistButton {
+    -fx-background-color: linear-gradient(to right, #f39c12, #d35400);
+   
+}
+#deletePlaylistButton{
+ -fx-background-color: linear-gradient(to right, #e74c3c, #c0392b);
+ 
+ }
+
+.clientViewButtons:hover {
+    -fx-text-fill: white;
+}
+
+/*css for home button, back button */
+/* */
+/* */
+/* */
+
+.homeButton {
+    -fx-background-color: linear-gradient(to bottom, #4d90fe, #4787ed);
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-padding: 4 10 4 10;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    /*-fx-graphic: url('./home-icon.png'); */
+   /* -fx-background-image: url('home-icon.png');*/
+    -fx-background-size: contain; /* Adjust the size of the background image */
+    -fx-background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+
+.homeButton:hover {
+    -fx-background-color: linear-gradient(to bottom, #4d90fe, #357ae8);
+}
+
+.homeButton:pressed {
+    -fx-background-color: linear-gradient(to bottom, #4d90fe, #357ae8);
+    -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.6), 5, 0.0, 0, 1);
+}
+
+/* Back button styling */
+.backButton {
+    -fx-background-color: #000000; /* Black background color */
+    -fx-text-fill: #ffffff; /* White text color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-padding: 8 16; /* Padding */
+    -fx-border-radius: 5; /* Border radius for rounded corners */
+    -fx-border-color: #000000; /* Border color (matching background color for a seamless look) */
+    -fx-cursor: hand; /* Change cursor on hover */
+}
+
+/* Hover effect for the back button */
+.backButton:hover {
+    -fx-background-color: #333333; /* Darker black on hover */
+}
+
+.signoutButton{
+	-fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+
+/* Add Songs button styling */
+.addSongsButton {
+    -fx-background-color: #3498db; /* Background color for the Add Songs button (Blue color) */
+    -fx-text-fill: #ffffff; /* Text color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-padding: 4 8; /* Padding */
+    -fx-border-radius: 5; /* Border radius for rounded corners */
+    -fx-border-color: #2980b9; /* Border color (matching background color for a seamless look) */
+    -fx-cursor: hand; /* Change cursor on hover */
+}
+
+/* Hover effect for the Add Songs button */
+.addSongsButton:hover {
+    -fx-background-color: #2c3e50; /* Darker blue on hover */
+}
+
+
+/* Css for all songs table */
+/*
+ * 
+ */
+ 
+.playButton {
+    -fx-font-size: 12px;
+    -fx-padding: 5px 5px;
+   -fx-background-color: linear-gradient(to bottom, #FF6347, #4682B4); /* Red to Steel Blue gradient */
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+    -fx-border-width: 2px;
+    -fx-border-color: #1E90FF; /* Border color is a shade of Steel Blue */
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.6) , 6, 0.0 , 0 , 1 );
+ /* Hover effect */
+    -fx-background-insets: 0, 1, 1;
+    -fx-background-radius: 5px, 4px, 3px;
+}
+
+.playButton:hover {
+    -fx-background-color: linear-gradient(to bottom, #FF6347, #1E90FF); /* Red to a lighter Steel Blue gradient on hover */
+}
+/* Apply general styling to the table */
+.SongstableView {
+    -fx-background-color: #ecf0f1; /* Light background color */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Shadow effect */
+}
+
+/* Style for table headers */
+
+
+ .column-header {
+   -fx-background-color: #3498db; /* Header background color */
+   -fx-text-fill: white; /* Header text color */
+}
+
+/* Alternate row colors */
+.table-row-cell:odd {
+    -fx-background-color: #ecf0f1; /* Alternate row color */
+}
+
+/* Hover effect for rows */
+.table-row-cell:hover {
+    -fx-background-color: #e0e4e6; /* Hover color with better text contrast */
+    -fx-cursor: hand; /* Change cursor on hover */
+}
+
+/* Transition effect for smooth hover animation */
+.table-row-cell {
+    -fx-transition: background-color 0.3s, -fx-border-color 0.3s, -fx-text-fill 0.3s;
+}
+
+/* Hover effect for cells */
+.table-row-cell:hover .table-cell {
+    -fx-background-color: #bdc3c7; /* Hover color for cells */
+}
+
+/* Styling for song title column (optional) */
+.table-cell:title-column {
+    -fx-font-weight: bold; /* Bold font for song titles */
+   /*  -fx-text-fill: #3498db; Blue color for song titles */
+}
+.table-row-cell:selected {
+    -fx-background-color: #4CAF50; /* Background color for selected items */
+}
+
+/* Hover effect for rows, excluding selected rows */
+.table-row-cell:not(.table-row-cell:selected):hover {
+    -fx-background-color: #e0e4e6; /* Hover color with better text contrast */
+    -fx-cursor: hand; /* Change cursor on hover */
+}
+
+
+/* Hover effect for cells, excluding selected rows */
+.table-row-cell:not(.table-row-cell:selected):hover .table-cell {
+    -fx-background-color: #bdc3c7; /* Hover color for cells */
+}
+
+/* Playlist list view background */
+/*
+ * 
+  */
+#playlistListView {
+    -fx-background-color: #ecf0f1; /* Light background color */
+}
+
+/* Apply general styling to the list view */
+#playlistListView {
+    -fx-background-color: #ecf0f1; /* Light background color */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Shadow effect */
+}
+
+/* Styling for list view items */
+#playlistListView .list-cell {
+    -fx-background-color: #ecf0f1; /* Background color for items */
+    -fx-text-fill: #2c3e50; /* Text color for items */
+}
+
+/* Hover effect for list view items */
+#playlistListView .list-cell:hover {
+    -fx-background-color: #bdc3c7; /* Hover color for items */
+    -fx-cursor: hand; /* Change cursor on hover */
+}
+
+/* Transition effect for smooth hover animation */
+#playlistListView .list-cell {
+    -fx-transition: background-color 0.3s, -fx-border-color 0.3s, -fx-text-fill 0.3s;
+}
+
+/* Selected item styling */
+#playlistListView .list-cell:selected {
+    -fx-background-color: #3498db; /* Background color for selected items */
+    -fx-text-fill: white; /* Text color for selected items */
+}
+
+/*
+ * Admin view css
+ 
+ 
+  */
+
+/* Style for the common manageButtons class */
+.manageButtons {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-padding: 8px 16px;
+    /*-fx-background-color: #4CAF50;  Green background color */
+    -fx-text-fill: white; /* White text color */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-cursor: hand;
+}
+
+/* Style for manageUsersButtons */
+#manageUsersButtons {
+    -fx-background-color: #4CAF50; /* green background color for manageUsersButtons */
+}
+
+
+/* Hover effect for all buttons */
+.manageButtons:hover {
+     -fx-background-color: #45a049; /* Darker green background color on hover */
+}
+
+/* Style for manageSongsButtons */
+#manageSongsButtons, #deleteUserButton {
+    -fx-background-color: #e74c3c; /* Red background color for manageSongsButtons */
+}
+
+#manageSongsButtons:hover, #deleteUserButton:hover {
+    -fx-background-color: #c0392b; /* Darker red background color on hover */
+}
+
+
+/* Pressed effect for all buttons */
+.manageButtons:pressed {
+    -fx-background-color: derive(-fx-background-color, -20%);
+}
+
+#changeAdminButton {
+-fx-background-color:#50807B;
+}
+#changeAdminButton:hover{
+	-fx-background-color:#26867C;
+}
+
+
+/*css for labels
+ * 
+ 
+ 
+  */
+  
+  
+#selectSongToPlayLabel, #displayPlaylistSelectPlaylistLabel, #playlistIsEmptyLabel, #selectSongToAddToPlaylistLabel,#playlistCreatedLabel,#playlistDeletedLabel,#AdminViewsongsAddedLabel,#userChangeStatusLabel,#songIsAddedLabel,#signupErrorLabel{
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333; /* Text color */
+    -fx-background-color: #f4f4f4; /* Background color */
+    -fx-content-display: center; /* or -fx-content-display: top; */
+    -fx-content-display: top;
+    -fx-effect: innershadow(3px 3px 3px rgba(0,0,0,0.3)); /* Inner shadow effect */
+}
+
+#displayPlaylistSelectPlaylistLabel, #playlistIsEmptyLabel,#playlistDeletedLabel,#songIsAddedLabel,#signupErrorLabel{
+	-fx-text-fill: #ed1717; /* Text color */
+}
+
+ /*Css for panes
+  * 
+   */ 
+   #clientViewPane{
+   	 -fx-background-color: white; /* Background color */
+   }
