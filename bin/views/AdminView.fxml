@@ -20,7 +20,7 @@
          <font>
             <Font size="26.0" />
          </font></Label>
-      <Pane id="adminHomePane" fx:id="homePane" layoutX="1.0" layoutY="55.0" prefHeight="345.0" prefWidth="600.0" stylesheets="@../application/application.css" visible="false">
+      <Pane id="adminHomePane" fx:id="homePane" layoutX="1.0" layoutY="55.0" prefHeight="345.0" prefWidth="600.0" stylesheets="@../application/application.css">
          <children>
             <VBox layoutX="212.0" layoutY="75.0" prefHeight="108.0" prefWidth="177.0" spacing="20.0">
                <children>
@@ -31,7 +31,7 @@
             <Button layoutX="498.0" layoutY="14.0" mnemonicParsing="false" onAction="#signOut" styleClass="signoutButton" stylesheets="@../application/application.css" text="SignOut" />
          </children>
       </Pane>
-      <Pane id="adminSongsPane" fx:id="songsPane" layoutY="55.0" prefHeight="345.0" prefWidth="600.0" stylesheets="@../application/application.css">
+      <Pane id="adminSongsPane" fx:id="songsPane" layoutY="55.0" prefHeight="345.0" prefWidth="600.0" stylesheets="@../application/application.css" visible="false">
          <children>
             <TableView id="AdminViewAllSongsTable" fx:id="songs_tableview" layoutX="162.0" layoutY="14.0" prefHeight="231.0" prefWidth="376.0" stylesheets="@../application/application.css">
               <columns>
