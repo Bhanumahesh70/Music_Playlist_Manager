@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import application.Main;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -10,6 +11,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -68,23 +71,39 @@ public class Delete_PlaylistController {
 	}
 	@FXML
     public void deleteButtonClicked(ActionEvent event) {
-        // Get the selected playlist from the TableView
-		PlaylistModel selectedPlaylist = playlists_tableview.getSelectionModel().getSelectedItem();
+		// Get the selected playlist from the TableView
+	    PlaylistModel selectedPlaylist = playlists_tableview.getSelectionModel().getSelectedItem();
 
-        // Delete the selected playlist from database
-        if (selectedPlaylist != null) {
-        	String playlistName = selectedPlaylist.getPlaylistName();
-        	PlaylistTable_DatabaseModel.deletePlaylist(playlistName, userId);
-        	
-            // Remove the playlist from the TableView
-            playlists_tableview.getItems().remove(selectedPlaylist);
-            // Clear the selection
-            playlists_tableview.getSelectionModel().clearSelection();
+	    // Delete the selected playlist from the database
+	    if (selectedPlaylist != null) {
+	        // Create a confirmation dialog
+	        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+	        alert.setTitle("Confirmation");
+	        alert.setHeaderText("Delete Playlist");
+	        alert.setContentText("Are you sure you want to delete the playlist: '" + selectedPlaylist.getPlaylistName() + "'?");
 
-        	String s = "The Playlist '"+ playlistName+"' is deleted";
-        	playlistDelete_label.setText(s);
-        } else {
-        	playlistDelete_label.setText("No Playlist is selected");
-        }
+	        // Show and wait for the user's response
+	        Optional<ButtonType> result = alert.showAndWait();
+
+	        // If the user clicks OK, delete the playlist
+	        if (result.isPresent() && result.get() == ButtonType.OK) {
+	            String playlistName = selectedPlaylist.getPlaylistName();
+	            PlaylistTable_DatabaseModel.deletePlaylist(playlistName, userId);
+
+	            // Remove the playlist from the TableView
+	            playlists_tableview.getItems().remove(selectedPlaylist);
+	            // Clear the selection
+	            playlists_tableview.getSelectionModel().clearSelection();
+
+	            String s = "The Playlist '" + playlistName + "' is deleted";
+	            playlistDelete_label.setText(s);
+	        } else {
+	            playlistDelete_label.setText("Playlist deletion canceled");
+	        }
+	    } else {
+	        playlistDelete_label.setText("No Playlist is selected");
+	    }
+        
+        
     }
 }

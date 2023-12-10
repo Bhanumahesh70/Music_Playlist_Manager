@@ -1,7 +1,10 @@
 package controllers;
 
 import java.io.IOException;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert;
 import java.util.List;
+import java.util.Optional;
 
 import application.Main;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -11,6 +14,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -305,40 +310,72 @@ public class AdminController {
 	@FXML
 	public void deleteUser() {
 		// Get the selected user from the TableView
-		UserModel selectedUser = usersTable.getSelectionModel().getSelectedItem();
+	    UserModel selectedUser = usersTable.getSelectionModel().getSelectedItem();
 
-		// Update the label with the selected user information
-		if (selectedUser != null) {
+	    // Update the label with the selected user information
+	    if (selectedUser != null) {
+	        // Create a confirmation dialog
+	        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+	        alert.setTitle("Confirmation");
+	        alert.setHeaderText("Delete User");
+	        alert.setContentText("Are you sure you want to delete the user: '" + selectedUser.getUsername() + "'?");
 
-			UserTable_DatabaseModel.deleteUserFromDatabase(selectedUser);
-			userModifyLabel.setText("The user '" + selectedUser.getUsername() + "'is removed");
-		} else {
-			userModifyLabel.setText("No user is selected");
-		}
+	        // Show and wait for the user's response
+	        Optional<ButtonType> result = alert.showAndWait();
 
-		displayUsers();
+	        // If the user clicks OK, delete the user
+	        if (result.isPresent() && result.get() == ButtonType.OK) {
+	            UserTable_DatabaseModel.deleteUserFromDatabase(selectedUser);
+	            userModifyLabel.setText("The user '" + selectedUser.getUsername() + "' is removed");
+	        } else {
+	            userModifyLabel.setText("Deletion canceled");
+	        }
+	    } else {
+	        userModifyLabel.setText("No user is selected");
+	    }
+
+	    displayUsers();
 	}
 
 	@FXML
 	public void changeAdminStatus(ActionEvent event) {
-		// Get the selected user from the TableView
-		UserModel selectedUser = usersTable.getSelectionModel().getSelectedItem();
+		 // Get the selected user from the TableView
+	    UserModel selectedUser = usersTable.getSelectionModel().getSelectedItem();
 
-		// Update the label with the selected user information
-		if (selectedUser != null) {
+	    // Update the label with the selected user information
+	    if (selectedUser != null) {
+	        // Create a confirmation dialog
+	        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+	        alert.setTitle("Confirmation");
+	        alert.setHeaderText("Change Admin Status");
+	        
+	        // Determine the content text based on the current admin status
+	        String contentText = selectedUser.isAdmin() ?
+	                "Are you sure you want to remove admin status for the user: '" + selectedUser.getUsername() + "'?" :
+	                "Are you sure you want to set admin status for the user: '" + selectedUser.getUsername() + "'?";
 
-			if (selectedUser.isAdmin()) {
-				UserTable_DatabaseModel.removeUserAsAdmin(selectedUser);
-				userModifyLabel.setText("The user '" + selectedUser.getUsername() + "' is no longer an admin");
-			} else {
-				UserTable_DatabaseModel.setUserAsAdmin(selectedUser);
-				userModifyLabel.setText("The user '" + selectedUser.getUsername() + "' is now an admin");
-			}
-		} else {
-			userModifyLabel.setText("No user is selected");
-		}
+	        alert.setContentText(contentText);
 
-		displayUsers();
+	        // Show and wait for the user's response
+	        Optional<ButtonType> result = alert.showAndWait();
+
+	        // If the user clicks OK, change the admin status
+	        if (result.isPresent() && result.get() == ButtonType.OK) {
+	            if (selectedUser.isAdmin()) {
+	                UserTable_DatabaseModel.removeUserAsAdmin(selectedUser);
+	                userModifyLabel.setText("The user '" + selectedUser.getUsername() + "' is no longer an admin");
+	            } else {
+	                UserTable_DatabaseModel.setUserAsAdmin(selectedUser);
+	                userModifyLabel.setText("The user '" + selectedUser.getUsername() + "' is now an admin");
+	            }
+	        } else {
+	            userModifyLabel.setText("Change admin status canceled");
+	        }
+	    } else {
+	        userModifyLabel.setText("No user is selected");
+	    }
+
+	    displayUsers();
 	}
 	
 	
@@ -356,16 +393,28 @@ public class AdminController {
 	}
 	@FXML
 	public void signOut() {
-		try {
-			AnchorPane root;
-			root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
-			Main.stage.setTitle("Login View");
-			Scene scene = new Scene(root);
-			Main.stage.setScene(scene);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// Create a confirmation dialog
+	    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+	    alert.setTitle("Confirmation");
+	    alert.setHeaderText("Sign Out");
+	    alert.setContentText("Are you sure you want to sign out?");
+
+	    // Show and wait for the user's response
+	    Optional<ButtonType> result = alert.showAndWait();
+
+	    // If the user clicks OK, proceed with sign-out
+	    if (result.isPresent() && result.get() == ButtonType.OK) {
+	        try {
+	            AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
+	            Main.stage.setTitle("Login View");
+	            Scene scene = new Scene(root);
+	            Main.stage.setScene(scene);
+	        } catch (IOException e) {
+	            // Handle exception
+	            e.printStackTrace();
+	        }
+	    }
+	    // If the user clicks Cancel, do nothing
 	}
 	
 	@FXML
@@ -382,7 +431,7 @@ public class AdminController {
 	        alert.setContentText("Are you sure you want to delete the song: '" + selectedSong.getTitle() + "'?");
 
 	        // Show and wait for the user's response
-	        ButtonType result = alert.showAndWait();
+	        Optional<ButtonType> result = alert.showAndWait();
 
 	        // If the user clicks OK, delete the song
 	        if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -395,4 +444,5 @@ public class AdminController {
 	    } else {
 	        playSongLabel.setText("No song is selected");
 	    }
+}
 }
