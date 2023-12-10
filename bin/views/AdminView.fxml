@@ -33,7 +33,7 @@
       </Pane>
       <Pane id="adminSongsPane" fx:id="songsPane" layoutY="55.0" prefHeight="345.0" prefWidth="600.0" stylesheets="@../application/application.css" visible="false">
          <children>
-            <TableView id="AdminViewAllSongsTable" fx:id="songs_tableview" layoutX="171.0" layoutY="24.0" prefHeight="231.0" prefWidth="376.0" stylesheets="@../application/application.css">
+            <TableView id="AdminViewAllSongsTable" fx:id="songs_tableview" layoutX="162.0" layoutY="14.0" prefHeight="231.0" prefWidth="376.0" stylesheets="@../application/application.css">
               <columns>
                 <TableColumn fx:id="title_column" prefWidth="142.6667022705078" text="Title" />
                 <TableColumn fx:id="album_column" prefWidth="84.0" text="Album" />
@@ -47,8 +47,9 @@
                   <Button mnemonicParsing="false" onAction="#addSongs_click" prefHeight="41.0" prefWidth="95.0" styleClass="addSongsButton" stylesheets="@../application/application.css" text="Add songs" />
                </children>
             </VBox>
-            <Button id="AdminViewPlayButton" layoutX="325.0" layoutY="265.0" mnemonicParsing="false" onAction="#playSong" prefHeight="31.0" prefWidth="54.0" styleClass="playButton" stylesheets="@../application/application.css" text="Play" />
-            <Label id="AdminViewsongsAddedLabel" fx:id="playSongLabel" layoutX="236.0" layoutY="314.0" prefHeight="17.0" prefWidth="361.0" stylesheets="@../application/application.css" textFill="#9f1313" />
+            <Button id="AdminViewPlayButton" layoutX="307.0" layoutY="251.0" mnemonicParsing="false" onAction="#playSong" prefHeight="31.0" prefWidth="54.0" styleClass="playButton" stylesheets="@../application/application.css" text="Play" />
+            <Label id="AdminViewsongsAddedLabel" fx:id="playSongLabel" layoutX="202.0" layoutY="323.0" prefHeight="17.0" prefWidth="361.0" stylesheets="@../application/application.css" textFill="#9f1313" />
+            <Button id="deleteSongsButton" layoutX="287.0" layoutY="286.0" mnemonicParsing="false" onAction="#deleteSongClicked" prefHeight="28.0" prefWidth="95.0" stylesheets="@../application/application.css" text="Delete Song" />
          </children>
       </Pane>
       <Pane id="usersPane" fx:id="usersPane" layoutY="55.0" prefHeight="345.0" prefWidth="600.0" stylesheets="@../application/application.css" visible="false">

@@ -359,12 +359,29 @@ public class AdminController {
 		try {
 			AnchorPane root;
 			root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
-			Main.stage.setTitle("All Songs");
+			Main.stage.setTitle("Login View");
 			Scene scene = new Scene(root);
 			Main.stage.setScene(scene);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@FXML
+	public void deleteSongClicked() {
+		// Get the selected song from the TableView
+        SongModel selectedSong = songs_tableview.getSelectionModel().getSelectedItem();
+        
+        // Update the label with the selected song information
+        if (selectedSong != null) {
+        	//Delete the selected song from dataBase
+            SongTable_DatabaseModel.deleteSong(selectedSong);
+        	displaySongs();
+        	playSongLabel.setText("The song: '" + selectedSong.getTitle()+"' is deleted");
+        } else {
+        	playSongLabel.setText("No song is selected");
+        }
+        
 	}
 }

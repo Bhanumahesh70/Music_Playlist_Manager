@@ -134,4 +134,22 @@ public class SongTable_DatabaseModel {
 		
 		return false;
 	}
+	
+	public static boolean deleteSong(SongModel song) {
+		try {
+
+			String sql = "DELETE FROM beatmusic_songs WHERE title =?";
+
+			PreparedStatement stmt = DBConnect.getConnection().prepareStatement(sql);
+			stmt.setString(1, song.getTitle());
+			stmt.executeUpdate();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 }

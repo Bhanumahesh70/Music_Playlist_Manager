@@ -117,7 +117,7 @@ public class ClientController {
 		try {
 			AnchorPane root;
 			root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
-			Main.stage.setTitle("All Songs");
+			Main.stage.setTitle("Login View");
 			Scene scene = new Scene(root);
 			Main.stage.setScene(scene);
 		} catch (IOException e) {

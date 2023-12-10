@@ -354,13 +354,21 @@
 .manageButtons:hover {
      -fx-background-color: #45a049; /* Darker green background color on hover */
 }
-
+#deleteSongsButton{
+	 -fx-font-size: 12px;
+    -fx-font-family: "Arial";
+    -fx-padding: 4px 8px;
+    /*-fx-background-color: #4CAF50;  Green background color */
+    -fx-text-fill: white; /* White text color */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-cursor: hand;
+}
 /* Style for manageSongsButtons */
-#manageSongsButtons, #deleteUserButton {
+#manageSongsButtons, #deleteUserButton,#deleteSongsButton {
     -fx-background-color: #e74c3c; /* Red background color for manageSongsButtons */
 }
 
-#manageSongsButtons:hover, #deleteUserButton:hover {
+#manageSongsButtons:hover, #deleteUserButton:hover,#deleteSongsButton:hover {
     -fx-background-color: #c0392b; /* Darker red background color on hover */
 }
 
@@ -376,6 +384,7 @@
 #changeAdminButton:hover{
 	-fx-background-color:#26867C;
 }
+
 
 
 /*css for labels
