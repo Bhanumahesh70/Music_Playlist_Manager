@@ -371,17 +371,28 @@ public class AdminController {
 	@FXML
 	public void deleteSongClicked() {
 		// Get the selected song from the TableView
-        SongModel selectedSong = songs_tableview.getSelectionModel().getSelectedItem();
-        
-        // Update the label with the selected song information
-        if (selectedSong != null) {
-        	//Delete the selected song from dataBase
-            SongTable_DatabaseModel.deleteSong(selectedSong);
-        	displaySongs();
-        	playSongLabel.setText("The song: '" + selectedSong.getTitle()+"' is deleted");
-        } else {
-        	playSongLabel.setText("No song is selected");
-        }
-        
-	}
+	    SongModel selectedSong = songs_tableview.getSelectionModel().getSelectedItem();
+
+	    // Update the label with the selected song information
+	    if (selectedSong != null) {
+	        // Create a confirmation dialog
+	        Alert alert = new Alert(AlertType.CONFIRMATION);
+	        alert.setTitle("Confirmation");
+	        alert.setHeaderText("Delete Song");
+	        alert.setContentText("Are you sure you want to delete the song: '" + selectedSong.getTitle() + "'?");
+
+	        // Show and wait for the user's response
+	        ButtonType result = alert.showAndWait();
+
+	        // If the user clicks OK, delete the song
+	        if (result.isPresent() && result.get() == ButtonType.OK) {
+	            SongTable_DatabaseModel.deleteSong(selectedSong);
+	            displaySongs();
+	            playSongLabel.setText("The song: '" + selectedSong.getTitle() + "' is deleted");
+	        } else {
+	            playSongLabel.setText("Deletion canceled");
+	        }
+	    } else {
+	        playSongLabel.setText("No song is selected");
+	    }
 }
